@@ -15,7 +15,7 @@ import { Region } from '@/types/mandala';
 export default function MandalaApp() {
   const [isTemplateOpen, setIsTemplateOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null); // null = 아직 결정 안됨
   const [currentRegion, setCurrentRegion] = useState<Region>(Region.CENTER); // 중앙 영역으로 시작
   const gridRef = useRef<HTMLDivElement>(null);
   const exportGridRef = useRef<HTMLDivElement>(null); // 이미지 내보내기용 (모든 영역 표시)
@@ -23,24 +23,23 @@ export default function MandalaApp() {
   const { data, updateCell, resetData, loadData, activeRegions } = useMandalaData();
   const { exportToPng, copyToClipboard } = useExport(exportGridRef);
 
-  // 모바일 감지
+  // 클라이언트 사이드 초기화 (모바일 감지 + URL 데이터 로드)
   useEffect(() => {
+    // 모바일 감지
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
-  // URL에서 데이터 로드 (클라이언트 사이드에서만)
-  useEffect(() => {
+    // URL에서 데이터 로드
     const urlData = getMandalaDataFromUrl();
     if (urlData.some((cell) => cell !== '')) {
       loadData(urlData);
     }
     setIsInitialized(true);
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, [loadData]);
 
   const handleSelectTemplate = (template: MandalaTemplate) => {
