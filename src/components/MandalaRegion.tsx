@@ -8,7 +8,7 @@ interface MandalaRegionProps {
   data: MandalaData;
   onCellChange: (globalIndex: number, value: string) => void;
   onRegionClick?: (region: Region) => void;
-  hideEmptyPlaceholder?: boolean;
+  forExport?: boolean;
 }
 
 export default function MandalaRegion({
@@ -16,7 +16,7 @@ export default function MandalaRegion({
   data,
   onCellChange,
   onRegionClick,
-  hideEmptyPlaceholder = false,
+  forExport = false,
 }: MandalaRegionProps) {
   return (
     <div className="grid grid-cols-3 grid-rows-3 gap-0.5 w-full h-full aspect-square">
@@ -34,7 +34,7 @@ export default function MandalaRegion({
             cell={cell}
             isCenter={isCenter}
             isMainGoal={isMainGoal}
-            hideEmptyPlaceholder={hideEmptyPlaceholder}
+            forExport={forExport}
           />
         );
       })}

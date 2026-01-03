@@ -10,7 +10,7 @@ interface MandalaCellProps {
   cell: Cell;
   isCenter: boolean; // 영역의 중앙 셀인지
   isMainGoal: boolean; // 메인 목표 셀인지 (전체 그리드의 정중앙)
-  hideEmptyPlaceholder?: boolean; // 빈 셀에 + 대신 회색 배경 (내보내기용)
+  forExport?: boolean; // 내보내기용 (플레이스홀더 변경)
 }
 
 export default function MandalaCell({
@@ -20,7 +20,7 @@ export default function MandalaCell({
   cell,
   isCenter,
   isMainGoal,
-  hideEmptyPlaceholder = false,
+  forExport = false,
 }: MandalaCellProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
@@ -63,9 +63,6 @@ export default function MandalaCell({
     [handleBlur, value]
   );
 
-  // 빈 셀 여부
-  const isEmpty = !value;
-
   // 스타일 결정
   const cellStyles = [
     'w-full h-full',
@@ -74,8 +71,6 @@ export default function MandalaCell({
     'border',
     colors.border,
     colors.bg,
-    // 내보내기 모드에서 빈 셀이면 약간 어둡게
-    hideEmptyPlaceholder && isEmpty ? 'brightness-[0.92]' : '',
     colors.text,
     'transition-all duration-200',
     'cursor-pointer',
@@ -107,7 +102,11 @@ export default function MandalaCell({
         />
       ) : (
         <span className="p-1 text-xs sm:text-sm break-words line-clamp-3 overflow-hidden">
-          {value || (hideEmptyPlaceholder ? null : <span className="text-gray-400">+</span>)}
+          {value || (
+            <span className="text-gray-400">
+              {forExport ? '-' : isMainGoal ? '핵심목표' : '+'}
+            </span>
+          )}
         </span>
       )}
     </div>

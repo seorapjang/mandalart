@@ -44,7 +44,7 @@ const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
                   data={data}
                   onCellChange={onCellChange}
                   onRegionClick={onRegionClick}
-                  hideEmptyPlaceholder={hideInactiveMessage}
+                  forExport={hideInactiveMessage}
                 />
               ) : hideInactiveMessage ? (
                 <div className="w-full h-full" />
