@@ -1,0 +1,115 @@
+import { MandalaData, createEmptyMandala, getGlobalIndex, RegionIndex, CellIndex } from '@/types/mandala';
+
+export interface MandalaTemplate {
+  id: string;
+  name: string;
+  description: string;
+  data: MandalaData;
+}
+
+// 템플릿에 데이터를 쉽게 입력하기 위한 헬퍼 함수
+function createTemplateData(
+  regions: Record<RegionIndex, string[]>
+): MandalaData {
+  const data = createEmptyMandala();
+
+  for (const [regionIndex, cells] of Object.entries(regions)) {
+    const rIndex = parseInt(regionIndex) as RegionIndex;
+    cells.forEach((value, cellIndex) => {
+      const globalIndex = getGlobalIndex(rIndex, cellIndex as CellIndex);
+      data[globalIndex] = value;
+    });
+  }
+
+  return data;
+}
+
+// 오타니 쇼헤이 만다라트 (고등학교 시절 작성)
+// 영역 배치:
+// [0] [1] [2]
+// [3] [4] [5]
+// [6] [7] [8]
+// 각 영역 내 셀 배치:
+// [0] [1] [2]
+// [3] [4] [5]  <- 4가 중앙
+// [6] [7] [8]
+export const OHTANI_TEMPLATE: MandalaTemplate = {
+  id: 'ohtani',
+  name: '오타니 쇼헤이',
+  description: '8개 구단 드래프트 1순위 지명을 위한 만다라트 (고교 시절 작성)',
+  data: createTemplateData({
+    // 영역 0 (좌상): 체력 만들기
+    0: [
+      '체력', '가동성', 'RSQ66.7→25',
+      '스태미나', '체력 만들기', '음식,영양 조절',
+      '유연성', 'FSQ90kg', '몸 상태',
+    ],
+    // 영역 1 (상단 중앙): 컨트롤
+    1: [
+      '인스텝', '체간 강화', '축 만들기',
+      '릴리스', '컨트롤', '멘탈',
+      '팔꿈치를 올리기', '하체 주도', '던지는 폼 유지',
+    ],
+    // 영역 2 (우상): 키구력
+    2: [
+      '하체 강화', '각도를 지으며', '스트레이트로 승부',
+      '팔로우 폼', '키구력', '팔꿈치를 앞으로',
+      '변화구', '기세', '가쁜 호흡',
+    ],
+    // 영역 3 (좌측 중앙): 멘탈
+    3: [
+      '상대를 맞추기', '상황에 대응', '파워 있게',
+      '잘 되지 않을 때의 대처', '멘탈', '승부 집착',
+      '배짱', '자신감', '동요하지 않는다',
+    ],
+    // 영역 4 (중앙): 메인 목표 - 8개 구단 드래프트 1순위
+    4: [
+      '체력 만들기', '컨트롤', '키구력',
+      '멘탈', '8개 구단\n드래프트 1순위', '구속 160km/h',
+      '인간성', '운', '변화구',
+    ],
+    // 영역 5 (우측 중앙): 구속 160km/h
+    5: [
+      '가동성', '어깨 주변', '몸통의 힘',
+      '피칭 폼', '구속\n160km/h', '하체 강화',
+      '라인 만들기', '체중증가', '손목 강화',
+    ],
+    // 영역 6 (좌하): 인간성
+    6: [
+      '감사', '생각', '계속해서 성장',
+      '예의', '인간성', '신뢰받는 사람',
+      '배려', '사랑받는 캐릭터', '계획성',
+    ],
+    // 영역 7 (하단 중앙): 운
+    7: [
+      '인사', '쓰레기 줍기', '심판에 대한 태도',
+      '물건을 소중히', '운', '긍정적 사고',
+      '응원받기', '책 읽기', '도구 관리',
+    ],
+    // 영역 8 (우하): 변화구
+    8: [
+      '커브', '슬라이더', '포크',
+      '스피드', '변화구', '체인지업',
+      '구종 늘리기', '투스트라이크에서 치게 하다', '패스트볼처럼 팔을 흔들기',
+    ],
+  }),
+};
+
+// 빈 템플릿
+export const EMPTY_TEMPLATE: MandalaTemplate = {
+  id: 'empty',
+  name: '새로 시작',
+  description: '빈 만다라트로 시작합니다',
+  data: createEmptyMandala(),
+};
+
+// 모든 템플릿 목록
+export const TEMPLATES: MandalaTemplate[] = [
+  EMPTY_TEMPLATE,
+  OHTANI_TEMPLATE,
+];
+
+// ID로 템플릿 찾기
+export function getTemplateById(id: string): MandalaTemplate | undefined {
+  return TEMPLATES.find((t) => t.id === id);
+}

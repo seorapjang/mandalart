@@ -1,0 +1,108 @@
+'use client';
+
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { RegionIndex, CellIndex, REGION_COLORS, MAIN_GOAL_INDEX, getGlobalIndex } from '@/types/mandala';
+
+interface MandalaCellProps {
+  value: string;
+  onChange: (value: string) => void;
+  regionIndex: RegionIndex;
+  cellIndex: CellIndex;
+  isCenter: boolean; // 영역의 중앙 셀인지
+  isMainGoal: boolean; // 메인 목표 셀인지 (전체 그리드의 정중앙)
+}
+
+export default function MandalaCell({
+  value,
+  onChange,
+  regionIndex,
+  cellIndex,
+  isCenter,
+  isMainGoal,
+}: MandalaCellProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editValue, setEditValue] = useState(value);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const colors = REGION_COLORS[regionIndex];
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+  }, [isEditing]);
+
+  useEffect(() => {
+    setEditValue(value);
+  }, [value]);
+
+  const handleClick = useCallback(() => {
+    setIsEditing(true);
+    setEditValue(value);
+  }, [value]);
+
+  const handleBlur = useCallback(() => {
+    setIsEditing(false);
+    if (editValue !== value) {
+      onChange(editValue);
+    }
+  }, [editValue, value, onChange]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleBlur();
+      } else if (e.key === 'Escape') {
+        setEditValue(value);
+        setIsEditing(false);
+      }
+    },
+    [handleBlur, value]
+  );
+
+  // 스타일 결정
+  const cellStyles = [
+    'w-full h-full',
+    'flex items-center justify-center',
+    'text-center',
+    'border',
+    colors.border,
+    colors.bg,
+    colors.text,
+    'transition-all duration-200',
+    'cursor-pointer',
+    isCenter ? 'font-semibold' : '',
+    isMainGoal ? 'font-bold text-lg ring-2 ring-amber-500' : '',
+    !isEditing && 'hover:brightness-95',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <div className={cellStyles} onClick={!isEditing ? handleClick : undefined}>
+      {isEditing ? (
+        <textarea
+          ref={inputRef}
+          value={editValue}
+          onChange={(e) => setEditValue(e.target.value)}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          className={`
+            w-full h-full p-1
+            text-center text-sm
+            resize-none
+            bg-white
+            focus:outline-none focus:ring-2 focus:ring-blue-500
+            ${colors.text}
+          `}
+          rows={2}
+        />
+      ) : (
+        <span className="p-1 text-xs sm:text-sm break-words line-clamp-3 overflow-hidden">
+          {value || <span className="text-gray-400">+</span>}
+        </span>
+      )}
+    </div>
+  );
+}
