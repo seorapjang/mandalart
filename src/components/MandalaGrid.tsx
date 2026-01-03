@@ -10,10 +10,11 @@ interface MandalaGridProps {
   onRegionClick?: (region: Region) => void;
   activeRegions?: Set<Region>;
   showAllRegions?: boolean; // true면 모든 영역 표시 (이미지 내보내기용)
+  hideInactiveMessage?: boolean; // true면 비활성 영역에 메시지 숨김 (내보내기용)
 }
 
 const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
-  ({ data, onCellChange, onRegionClick, activeRegions, showAllRegions = false }, ref) => {
+  ({ data, onCellChange, onRegionClick, activeRegions, showAllRegions = false, hideInactiveMessage = false }, ref) => {
     // activeRegions가 없거나 showAllRegions가 true면 모든 영역 표시
     const shouldShowRegion = (region: Region) => {
       if (showAllRegions || !activeRegions) return true;
@@ -44,6 +45,8 @@ const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
                   onCellChange={onCellChange}
                   onRegionClick={onRegionClick}
                 />
+              ) : hideInactiveMessage ? (
+                <div className="w-full h-full" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-gray-400 text-xs text-center p-2">

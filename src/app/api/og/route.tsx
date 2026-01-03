@@ -171,15 +171,6 @@ export async function GET(request: NextRequest) {
             gap: '8px',
           }}
         >
-          <div
-            style={{
-              fontSize: '16px',
-              color: '#9CA3AF',
-              fontWeight: '500',
-            }}
-          >
-            만다라트 • 목표 설정 도구
-          </div>
         </div>
       </div>
     ),

@@ -127,7 +127,8 @@ export default function MandalaApp() {
             ref={exportGridRef}
             data={data}
             onCellChange={updateCell}
-            showAllRegions={true}
+            activeRegions={activeRegions}
+            hideInactiveMessage={true}
           />
         </div>
 
