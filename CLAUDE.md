@@ -1,0 +1,29 @@
+# Claude Code 프로젝트 룰
+
+## 커밋 규칙
+
+작업 완료 후 항상 적절한 커밋 메시지와 함께 커밋합니다.
+
+### 커밋 메시지 형식
+```
+<type>: <subject>
+
+<body>
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+```
+
+### 타입
+- `feat`: 새로운 기능
+- `fix`: 버그 수정
+- `refactor`: 리팩토링
+- `style`: 스타일 변경 (코드 동작에 영향 없음)
+- `docs`: 문서 변경
+- `chore`: 빌드, 설정 등 기타 변경
+
+### 커밋 시점
+- 기능 구현 완료 시
+- 버그 수정 완료 시
+- 사용자 요청 작업 완료 시
