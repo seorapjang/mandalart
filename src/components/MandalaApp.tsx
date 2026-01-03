@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import MandalaGrid from '@/components/MandalaGrid';
 import Toolbar from '@/components/Toolbar';
 import TemplateSelector from '@/components/TemplateSelector';
+import GuideModal from '@/components/GuideModal';
 import MobileNavigation from '@/components/MobileNavigation';
 import MobileRegionView from '@/components/MobileRegionView';
 import { useMandalaData } from '@/hooks/useMandalaData';
@@ -14,6 +15,7 @@ import { Region } from '@/types/mandala';
 
 export default function MandalaApp() {
   const [isTemplateOpen, setIsTemplateOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isMobile, setIsMobile] = useState<boolean | null>(null); // null = 아직 결정 안됨
   const [currentRegion, setCurrentRegion] = useState<Region>(Region.CENTER); // 중앙 영역으로 시작
@@ -90,6 +92,7 @@ export default function MandalaApp() {
             onCopyToClipboard={copyToClipboard}
             onReset={handleReset}
             onSelectTemplate={() => setIsTemplateOpen(true)}
+            onOpenGuide={() => setIsGuideOpen(true)}
           />
         </div>
 
@@ -144,6 +147,12 @@ export default function MandalaApp() {
         isOpen={isTemplateOpen}
         onClose={() => setIsTemplateOpen(false)}
         onSelect={handleSelectTemplate}
+      />
+
+      {/* 가이드 모달 */}
+      <GuideModal
+        isOpen={isGuideOpen}
+        onClose={() => setIsGuideOpen(false)}
       />
     </main>
   );
