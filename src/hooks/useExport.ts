@@ -3,6 +3,9 @@
 import { useCallback, RefObject } from 'react';
 import { toPng } from 'html-to-image';
 
+// DOM 업데이트를 기다리는 헬퍼 함수
+const waitForDomUpdate = () => new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 100)));
+
 export function useExport(gridRef: RefObject<HTMLDivElement | null>) {
   // PNG 이미지 다운로드
   const exportToPng = useCallback(async () => {
@@ -12,10 +15,14 @@ export function useExport(gridRef: RefObject<HTMLDivElement | null>) {
     }
 
     try {
+      // DOM 업데이트 대기
+      await waitForDomUpdate();
+
       const dataUrl = await toPng(gridRef.current, {
         quality: 1,
         pixelRatio: 2, // 고해상도
         backgroundColor: '#f3f4f6', // gray-100
+        cacheBust: true, // 캐시 무효화
       });
 
       // 다운로드 링크 생성
@@ -37,10 +44,14 @@ export function useExport(gridRef: RefObject<HTMLDivElement | null>) {
     }
 
     try {
+      // DOM 업데이트 대기
+      await waitForDomUpdate();
+
       const dataUrl = await toPng(gridRef.current, {
         quality: 1,
         pixelRatio: 2,
         backgroundColor: '#f3f4f6',
+        cacheBust: true, // 캐시 무효화
       });
 
       // Data URL을 Blob으로 변환

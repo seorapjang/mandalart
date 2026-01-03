@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import MandalaGrid from '@/components/MandalaGrid';
 import Toolbar from '@/components/Toolbar';
 import TemplateSelector from '@/components/TemplateSelector';
@@ -22,6 +22,9 @@ export default function MandalaApp() {
 
   const { data, updateCell, resetData, loadData, activeRegions } = useMandalaData();
   const { exportToPng, copyToClipboard } = useExport(exportGridRef);
+
+  // 내보내기 그리드 강제 재렌더링을 위한 키
+  const exportGridKey = useMemo(() => data.join('|'), [data]);
 
   // 클라이언트 사이드 초기화 (모바일 감지 + URL 데이터 로드)
   useEffect(() => {
@@ -119,7 +122,7 @@ export default function MandalaApp() {
         )}
 
         {/* 이미지 내보내기용 전체 그리드 (숨김) */}
-        <div className="fixed -left-[9999px] -top-[9999px]">
+        <div key={exportGridKey} className="fixed -left-[9999px] -top-[9999px]">
           <MandalaGrid
             ref={exportGridRef}
             data={data}
