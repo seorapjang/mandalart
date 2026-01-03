@@ -1,14 +1,29 @@
 'use client';
 
-import { RegionIndex, REGION_COLORS } from '@/types/mandala';
+import { RegionIndex, MandalaData, REGION_COLORS, getGlobalIndex, CellIndex, MAIN_GOAL_INDEX } from '@/types/mandala';
 
 interface MobileNavigationProps {
   currentRegion: RegionIndex;
   onRegionChange: (region: RegionIndex) => void;
   activeRegions?: Set<RegionIndex>;
+  data: MandalaData;
 }
 
-const REGION_LABELS: Record<RegionIndex, string> = {
+// 영역 인덱스 → 중앙 영역의 해당 셀 인덱스 (영역 이름을 가져오기 위해)
+const REGION_TO_CENTER_CELL: Record<RegionIndex, CellIndex | null> = {
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4, // 중앙 영역은 메인 목표
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+};
+
+// 기본 레이블 (이름이 없을 때)
+const DEFAULT_LABELS: Record<RegionIndex, string> = {
   0: '좌상',
   1: '상',
   2: '우상',
@@ -24,6 +39,7 @@ export default function MobileNavigation({
   currentRegion,
   onRegionChange,
   activeRegions,
+  data,
 }: MobileNavigationProps) {
   const regions: RegionIndex[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -31,6 +47,21 @@ export default function MobileNavigation({
   const isRegionActive = (region: RegionIndex) => {
     if (!activeRegions) return true;
     return activeRegions.has(region);
+  };
+
+  // 영역의 이름 가져오기 (중앙 영역의 해당 셀 값)
+  const getRegionLabel = (region: RegionIndex) => {
+    const cellIndex = REGION_TO_CENTER_CELL[region];
+    if (cellIndex === null) return DEFAULT_LABELS[region];
+
+    // 중앙 영역(4)의 경우 메인 목표
+    const globalIndex = region === 4 ? MAIN_GOAL_INDEX : getGlobalIndex(4, cellIndex);
+    const value = data[globalIndex]?.trim();
+
+    if (!value) return DEFAULT_LABELS[region];
+
+    // 너무 긴 경우 자르기
+    return value.length > 8 ? value.slice(0, 7) + '…' : value;
   };
 
   return (
@@ -56,7 +87,7 @@ export default function MobileNavigation({
               ${isCurrent ? 'ring-2 ring-offset-1 ring-gray-800 scale-105' : 'opacity-70 hover:opacity-100'}
             `}
           >
-            {REGION_LABELS[region]}
+            {getRegionLabel(region)}
           </button>
         );
       })}

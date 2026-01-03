@@ -97,6 +97,7 @@ export default function MandalaApp() {
             currentRegion={currentRegion}
             onRegionChange={setCurrentRegion}
             activeRegions={activeRegions}
+            data={data}
           />
         )}
 
