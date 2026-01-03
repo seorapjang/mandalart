@@ -41,7 +41,8 @@ export default function MobileNavigation({
   activeRegions,
   data,
 }: MobileNavigationProps) {
-  const regions: RegionIndex[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  // 중앙(4)을 가장 먼저 표시
+  const regions: RegionIndex[] = [4, 0, 1, 2, 3, 5, 6, 7, 8];
 
   // activeRegions가 없으면 모든 영역 표시
   const isRegionActive = (region: RegionIndex) => {
