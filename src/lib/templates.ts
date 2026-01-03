@@ -95,6 +95,69 @@ export const OHTANI_TEMPLATE: MandalaTemplate = {
   }),
 };
 
+// 만다라트 웹앱 프로젝트 기획 만다라트
+export const PROJECT_TEMPLATE: MandalaTemplate = {
+  id: 'mandala-project',
+  name: '만다라트 프로젝트',
+  description: '이 만다라트 웹앱을 만들기 위해 고민했던 내용들',
+  data: createTemplateData({
+    // 영역 0 (좌상): UI/UX 디자인
+    0: [
+      '색상 팔레트', '영역별 구분', '직관적 편집',
+      '시각적 피드백', 'UI/UX 디자인', '반응형 레이아웃',
+      '폰트 선택', '여백과 정렬', '일관된 스타일',
+    ],
+    // 영역 1 (상단 중앙): 데이터 구조
+    1: [
+      '81칸 배열', '영역-셀 매핑', '인덱스 계산',
+      'enum 타입', '데이터 구조', '양방향 동기화',
+      '타입 안전성', '상태 관리', '불변성 유지',
+    ],
+    // 영역 2 (우상): 공유 기능
+    2: [
+      'URL 인코딩', 'LZ-String 압축', 'Base64 변환',
+      '링크 복사', '공유 기능', '복원 로직',
+      '짧은 URL', '클립보드 API', '공유 미리보기',
+    ],
+    // 영역 3 (좌측 중앙): 모바일 대응
+    3: [
+      '탭 네비게이션', '영역별 보기', '터치 최적화',
+      '화면 감지', '모바일 대응', '버튼 크기',
+      '스크롤 처리', '점진적 표시', '제스처 지원',
+    ],
+    // 영역 4 (중앙): 메인 목표
+    4: [
+      'UI/UX 디자인', '데이터 구조', '공유 기능',
+      '모바일 대응', '만다라트\n웹앱 완성', '내보내기',
+      'SEO 최적화', '사용자 경험', '기술 스택',
+    ],
+    // 영역 5 (우측 중앙): 내보내기
+    5: [
+      'PNG 생성', 'html-to-image', '클립보드 복사',
+      '이미지 품질', '내보내기', '전체 영역 표시',
+      '파일 다운로드', '비동기 처리', '에러 핸들링',
+    ],
+    // 영역 6 (좌하): SEO 최적화
+    6: [
+      '메타 태그', 'OG 이미지', '동적 제목',
+      '키워드 설정', 'SEO 최적화', '구조화 데이터',
+      'Twitter Card', '사이트맵', '접근성',
+    ],
+    // 영역 7 (하단 중앙): 사용자 경험
+    7: [
+      '즉각 반응', '로딩 상태', '에러 메시지',
+      '키보드 지원', '사용자 경험', '자동 저장',
+      '템플릿 제공', '안내 문구', '직관적 흐름',
+    ],
+    // 영역 8 (우하): 기술 스택
+    8: [
+      'Next.js 15', 'React 19', 'TypeScript',
+      'Tailwind CSS', '기술 스택', 'Vercel OG',
+      'pnpm', 'Pretendard', 'Edge Runtime',
+    ],
+  }),
+};
+
 // 빈 템플릿
 export const EMPTY_TEMPLATE: MandalaTemplate = {
   id: 'empty',
@@ -107,6 +170,7 @@ export const EMPTY_TEMPLATE: MandalaTemplate = {
 export const TEMPLATES: MandalaTemplate[] = [
   EMPTY_TEMPLATE,
   OHTANI_TEMPLATE,
+  PROJECT_TEMPLATE,
 ];
 
 // ID로 템플릿 찾기
