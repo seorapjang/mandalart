@@ -158,17 +158,8 @@ export const PROJECT_TEMPLATE: MandalaTemplate = {
   }),
 };
 
-// 빈 템플릿
-export const EMPTY_TEMPLATE: MandalaTemplate = {
-  id: 'empty',
-  name: '새로 시작',
-  description: '빈 만다라트로 시작합니다',
-  data: createEmptyMandala(),
-};
-
 // 모든 템플릿 목록
 export const TEMPLATES: MandalaTemplate[] = [
-  EMPTY_TEMPLATE,
   OHTANI_TEMPLATE,
   PROJECT_TEMPLATE,
 ];
