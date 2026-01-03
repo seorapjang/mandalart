@@ -10,13 +10,13 @@ import { useMandalaData } from '@/hooks/useMandalaData';
 import { useExport } from '@/hooks/useExport';
 import { getMandalaDataFromUrl } from '@/lib/encoder';
 import { MandalaTemplate } from '@/lib/templates';
-import { RegionIndex } from '@/types/mandala';
+import { Region } from '@/types/mandala';
 
 export default function MandalaApp() {
   const [isTemplateOpen, setIsTemplateOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [currentRegion, setCurrentRegion] = useState<RegionIndex>(4); // 중앙 영역으로 시작
+  const [currentRegion, setCurrentRegion] = useState<Region>(Region.CENTER); // 중앙 영역으로 시작
   const gridRef = useRef<HTMLDivElement>(null);
   const exportGridRef = useRef<HTMLDivElement>(null); // 이미지 내보내기용 (모든 영역 표시)
 
@@ -52,11 +52,11 @@ export default function MandalaApp() {
       resetData();
       // URL 파라미터도 제거
       window.history.replaceState({}, '', window.location.pathname);
-      setCurrentRegion(4); // 중앙 영역으로 리셋
+      setCurrentRegion(Region.CENTER); // 중앙 영역으로 리셋
     }
   };
 
-  const handleNavigateToRegion = (region: RegionIndex) => {
+  const handleNavigateToRegion = (region: Region) => {
     setCurrentRegion(region);
   };
 
@@ -104,7 +104,7 @@ export default function MandalaApp() {
         {/* 만다라트 그리드 */}
         {isMobile ? (
           <MobileRegionView
-            regionIndex={currentRegion}
+            region={currentRegion}
             data={data}
             onCellChange={updateCell}
             onNavigateToRegion={handleNavigateToRegion}

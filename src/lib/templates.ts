@@ -1,4 +1,4 @@
-import { MandalaData, createEmptyMandala, getGlobalIndex, RegionIndex, CellIndex } from '@/types/mandala';
+import { MandalaData, createEmptyMandala, getGlobalIndex, Region, Cell } from '@/types/mandala';
 
 export interface MandalaTemplate {
   id: string;
@@ -9,14 +9,14 @@ export interface MandalaTemplate {
 
 // 템플릿에 데이터를 쉽게 입력하기 위한 헬퍼 함수
 function createTemplateData(
-  regions: Record<RegionIndex, string[]>
+  regions: Record<Region, string[]>
 ): MandalaData {
   const data = createEmptyMandala();
 
-  for (const [regionIndex, cells] of Object.entries(regions)) {
-    const rIndex = parseInt(regionIndex) as RegionIndex;
+  for (const [regionKey, cells] of Object.entries(regions)) {
+    const region = parseInt(regionKey) as Region;
     cells.forEach((value, cellIndex) => {
-      const globalIndex = getGlobalIndex(rIndex, cellIndex as CellIndex);
+      const globalIndex = getGlobalIndex(region, cellIndex as Cell);
       data[globalIndex] = value;
     });
   }

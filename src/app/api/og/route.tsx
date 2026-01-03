@@ -1,21 +1,21 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { decodeMandalaData, URL_PARAM_KEY } from '@/lib/encoder';
-import { MandalaData, RegionIndex, CellIndex, getGlobalIndex, MAIN_GOAL_INDEX } from '@/types/mandala';
+import { MandalaData, Region, MAIN_GOAL_INDEX } from '@/types/mandala';
 
 export const runtime = 'edge';
 
 // 영역별 색상 (hex 값)
-const REGION_COLORS: Record<RegionIndex, string> = {
-  0: '#DBEAFE', // blue-100
-  1: '#D1FAE5', // emerald-100
-  2: '#FCE7F3', // pink-100
-  3: '#E0E7FF', // indigo-100
-  4: '#FEF3C7', // amber-100
-  5: '#FEE2E2', // red-100
-  6: '#CFFAFE', // cyan-100
-  7: '#F3E8FF', // purple-100
-  8: '#ECFCCB', // lime-100
+const REGION_COLORS: Record<Region, string> = {
+  [Region.TOP_LEFT]: '#DBEAFE', // blue-100
+  [Region.TOP]: '#D1FAE5', // emerald-100
+  [Region.TOP_RIGHT]: '#FCE7F3', // pink-100
+  [Region.LEFT]: '#E0E7FF', // indigo-100
+  [Region.CENTER]: '#FEF3C7', // amber-100
+  [Region.RIGHT]: '#FEE2E2', // red-100
+  [Region.BOTTOM_LEFT]: '#CFFAFE', // cyan-100
+  [Region.BOTTOM]: '#F3E8FF', // purple-100
+  [Region.BOTTOM_RIGHT]: '#ECFCCB', // lime-100
 };
 
 function getCellColor(globalIndex: number): string {
@@ -23,8 +23,8 @@ function getCellColor(globalIndex: number): string {
   const col = globalIndex % 9;
   const regionRow = Math.floor(row / 3);
   const regionCol = Math.floor(col / 3);
-  const regionIndex = (regionRow * 3 + regionCol) as RegionIndex;
-  return REGION_COLORS[regionIndex];
+  const region = (regionRow * 3 + regionCol) as Region;
+  return REGION_COLORS[region];
 }
 
 export async function GET(request: NextRequest) {

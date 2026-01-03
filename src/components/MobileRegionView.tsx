@@ -1,25 +1,25 @@
 'use client';
 
-import { RegionIndex, MandalaData } from '@/types/mandala';
+import { Region, MandalaData } from '@/types/mandala';
 import MandalaRegion from './MandalaRegion';
 
 interface MobileRegionViewProps {
-  regionIndex: RegionIndex;
+  region: Region;
   data: MandalaData;
   onCellChange: (globalIndex: number, value: string) => void;
-  onNavigateToRegion: (region: RegionIndex) => void;
-  activeRegions?: Set<RegionIndex>;
+  onNavigateToRegion: (region: Region) => void;
+  activeRegions?: Set<Region>;
 }
 
 export default function MobileRegionView({
-  regionIndex,
+  region,
   data,
   onCellChange,
   onNavigateToRegion,
   activeRegions,
 }: MobileRegionViewProps) {
   // 비활성화된 영역에 접근하려고 하면 중앙으로 이동
-  const isRegionActive = !activeRegions || activeRegions.has(regionIndex);
+  const isRegionActive = !activeRegions || activeRegions.has(region);
 
   if (!isRegionActive) {
     return (
@@ -28,7 +28,7 @@ export default function MobileRegionView({
           이 영역은 아직 활성화되지 않았습니다.
         </p>
         <button
-          onClick={() => onNavigateToRegion(4)}
+          onClick={() => onNavigateToRegion(Region.CENTER)}
           className="px-4 py-2 bg-amber-100 text-amber-900 rounded-lg font-medium hover:bg-amber-200 transition-colors"
         >
           중앙 영역으로 이동
@@ -42,23 +42,23 @@ export default function MobileRegionView({
       {/* 현재 영역 표시 */}
       <div className="mb-4">
         <MandalaRegion
-          regionIndex={regionIndex}
+          region={region}
           data={data}
           onCellChange={onCellChange}
         />
       </div>
 
       {/* 중앙 영역일 때 안내 메시지 */}
-      {regionIndex === 4 && (
+      {region === Region.CENTER && (
         <p className="text-center text-sm text-gray-500 mt-2">
           모서리에 하위 목표를 입력하면 해당 영역이 활성화됩니다
         </p>
       )}
 
       {/* 외곽 영역일 때 중앙으로 돌아가기 버튼 */}
-      {regionIndex !== 4 && (
+      {region !== Region.CENTER && (
         <button
-          onClick={() => onNavigateToRegion(4)}
+          onClick={() => onNavigateToRegion(Region.CENTER)}
           className="w-full mt-4 py-2 bg-amber-100 text-amber-900 rounded-lg font-medium hover:bg-amber-200 transition-colors"
         >
           중앙 영역으로 돌아가기

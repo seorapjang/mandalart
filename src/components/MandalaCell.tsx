@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { RegionIndex, CellIndex, REGION_COLORS, MAIN_GOAL_INDEX, getGlobalIndex } from '@/types/mandala';
+import { Region, Cell, REGION_COLORS } from '@/types/mandala';
 
 interface MandalaCellProps {
   value: string;
   onChange: (value: string) => void;
-  regionIndex: RegionIndex;
-  cellIndex: CellIndex;
+  region: Region;
+  cell: Cell;
   isCenter: boolean; // 영역의 중앙 셀인지
   isMainGoal: boolean; // 메인 목표 셀인지 (전체 그리드의 정중앙)
 }
@@ -15,15 +15,15 @@ interface MandalaCellProps {
 export default function MandalaCell({
   value,
   onChange,
-  regionIndex,
-  cellIndex,
+  region,
+  cell,
   isCenter,
   isMainGoal,
 }: MandalaCellProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const colors = REGION_COLORS[regionIndex];
+  const colors = REGION_COLORS[region];
 
   useEffect(() => {
     if (isEditing && inputRef.current) {

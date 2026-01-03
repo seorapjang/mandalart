@@ -1,38 +1,38 @@
 'use client';
 
-import { RegionIndex, MandalaData, REGION_COLORS, getGlobalIndex, CellIndex, MAIN_GOAL_INDEX } from '@/types/mandala';
+import { Region, Cell, MandalaData, REGION_COLORS, getGlobalIndex, MAIN_GOAL_INDEX } from '@/types/mandala';
 
 interface MobileNavigationProps {
-  currentRegion: RegionIndex;
-  onRegionChange: (region: RegionIndex) => void;
-  activeRegions?: Set<RegionIndex>;
+  currentRegion: Region;
+  onRegionChange: (region: Region) => void;
+  activeRegions?: Set<Region>;
   data: MandalaData;
 }
 
-// 영역 인덱스 → 중앙 영역의 해당 셀 인덱스 (영역 이름을 가져오기 위해)
-const REGION_TO_CENTER_CELL: Record<RegionIndex, CellIndex | null> = {
-  0: 0,
-  1: 1,
-  2: 2,
-  3: 3,
-  4: 4, // 중앙 영역은 메인 목표
-  5: 5,
-  6: 6,
-  7: 7,
-  8: 8,
+// 영역 → 중앙 영역의 해당 셀 (영역 이름을 가져오기 위해)
+const REGION_TO_CENTER_CELL: Record<Region, Cell> = {
+  [Region.TOP_LEFT]: Cell.TOP_LEFT,
+  [Region.TOP]: Cell.TOP,
+  [Region.TOP_RIGHT]: Cell.TOP_RIGHT,
+  [Region.LEFT]: Cell.LEFT,
+  [Region.CENTER]: Cell.CENTER,
+  [Region.RIGHT]: Cell.RIGHT,
+  [Region.BOTTOM_LEFT]: Cell.BOTTOM_LEFT,
+  [Region.BOTTOM]: Cell.BOTTOM,
+  [Region.BOTTOM_RIGHT]: Cell.BOTTOM_RIGHT,
 };
 
 // 기본 레이블 (이름이 없을 때)
-const DEFAULT_LABELS: Record<RegionIndex, string> = {
-  0: '좌상',
-  1: '상',
-  2: '우상',
-  3: '좌',
-  4: '중앙',
-  5: '우',
-  6: '좌하',
-  7: '하',
-  8: '우하',
+const DEFAULT_LABELS: Record<Region, string> = {
+  [Region.TOP_LEFT]: '좌상',
+  [Region.TOP]: '상',
+  [Region.TOP_RIGHT]: '우상',
+  [Region.LEFT]: '좌',
+  [Region.CENTER]: '중앙',
+  [Region.RIGHT]: '우',
+  [Region.BOTTOM_LEFT]: '좌하',
+  [Region.BOTTOM]: '하',
+  [Region.BOTTOM_RIGHT]: '우하',
 };
 
 export default function MobileNavigation({
@@ -41,22 +41,28 @@ export default function MobileNavigation({
   activeRegions,
   data,
 }: MobileNavigationProps) {
-  // 중앙(4)을 가장 먼저 표시
-  const regions: RegionIndex[] = [4, 0, 1, 2, 3, 5, 6, 7, 8];
+  // 중앙을 가장 먼저 표시
+  const regions: Region[] = [
+    Region.CENTER,
+    Region.TOP_LEFT, Region.TOP, Region.TOP_RIGHT,
+    Region.LEFT, Region.RIGHT,
+    Region.BOTTOM_LEFT, Region.BOTTOM, Region.BOTTOM_RIGHT,
+  ];
 
   // activeRegions가 없으면 모든 영역 표시
-  const isRegionActive = (region: RegionIndex) => {
+  const isRegionActive = (region: Region) => {
     if (!activeRegions) return true;
     return activeRegions.has(region);
   };
 
   // 영역의 이름 가져오기 (중앙 영역의 해당 셀 값)
-  const getRegionLabel = (region: RegionIndex) => {
-    const cellIndex = REGION_TO_CENTER_CELL[region];
-    if (cellIndex === null) return DEFAULT_LABELS[region];
+  const getRegionLabel = (region: Region) => {
+    const cell = REGION_TO_CENTER_CELL[region];
 
-    // 중앙 영역(4)의 경우 메인 목표
-    const globalIndex = region === 4 ? MAIN_GOAL_INDEX : getGlobalIndex(4, cellIndex);
+    // 중앙 영역의 경우 메인 목표
+    const globalIndex = region === Region.CENTER
+      ? MAIN_GOAL_INDEX
+      : getGlobalIndex(Region.CENTER, cell);
     const value = data[globalIndex]?.trim();
 
     if (!value) return DEFAULT_LABELS[region];
@@ -73,7 +79,7 @@ export default function MobileNavigation({
         const isCurrent = currentRegion === region;
 
         // 비활성화된 영역은 숨김 (중앙 영역 제외)
-        if (!isActive && region !== 4) {
+        if (!isActive && region !== Region.CENTER) {
           return null;
         }
 
