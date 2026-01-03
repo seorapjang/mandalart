@@ -11,22 +11,22 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const params = await searchParams;
   const encodedData = params[URL_PARAM_KEY];
 
-  let mainGoal = '만다라트';
-  let description = '만다라트를 쉽게 만들고 공유하세요. 목표를 9개의 세부 목표로 나누고, 각각을 8개의 실행 항목으로 구체화하는 목표 설정 도구입니다.';
-
-  if (typeof encodedData === 'string') {
-    const data = decodeMandalaData(encodedData);
-    if (data && data[MAIN_GOAL_INDEX]) {
-      mainGoal = data[MAIN_GOAL_INDEX];
-      description = `${mainGoal} - 만다라트로 목표를 체계적으로 관리하세요.`;
-    }
+  // URL 파라미터가 없으면 layout.tsx의 기본 메타데이터 사용
+  if (typeof encodedData !== 'string') {
+    return {};
   }
 
+  const data = decodeMandalaData(encodedData);
+  const mainGoal = data?.[MAIN_GOAL_INDEX];
+
+  // mainGoal이 없으면 layout.tsx의 기본 메타데이터 사용
+  if (!mainGoal) {
+    return {};
+  }
+
+  const description = `${mainGoal} - 만다라트로 목표를 체계적으로 관리하세요.`;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  // 데이터가 있으면 동적 OG 이미지, 없으면 정적 기본 이미지 사용
-  const ogImageUrl = typeof encodedData === 'string'
-    ? `${baseUrl}/api/og?${URL_PARAM_KEY}=${encodeURIComponent(encodedData)}`
-    : `${baseUrl}/og-image.png`;
+  const ogImageUrl = `${baseUrl}/api/og?${URL_PARAM_KEY}=${encodeURIComponent(encodedData)}`;
 
   return {
     title: `${mainGoal} - 만다라트`,
