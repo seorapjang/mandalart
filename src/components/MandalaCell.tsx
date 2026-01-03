@@ -73,8 +73,9 @@ export default function MandalaCell({
     'text-center',
     'border',
     colors.border,
-    // 내보내기 모드에서 빈 셀이면 회색 배경, 아니면 기본 배경
-    hideEmptyPlaceholder && isEmpty ? 'bg-gray-200' : colors.bg,
+    colors.bg,
+    // 내보내기 모드에서 빈 셀이면 약간 어둡게
+    hideEmptyPlaceholder && isEmpty ? 'brightness-[0.92]' : '',
     colors.text,
     'transition-all duration-200',
     'cursor-pointer',
