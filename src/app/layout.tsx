@@ -17,7 +17,6 @@ export const metadata: Metadata = {
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
-  manifest: "/manifest.json",
   openGraph: {
     title: "만다라트 - 목표 설정 도구",
     description: "만다라트를 쉽게 만들고 공유하세요. 목표를 체계적으로 설정하는 도구입니다.",
