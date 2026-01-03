@@ -18,9 +18,10 @@ export default function MandalaApp() {
   const [isMobile, setIsMobile] = useState(false);
   const [currentRegion, setCurrentRegion] = useState<RegionIndex>(4); // 중앙 영역으로 시작
   const gridRef = useRef<HTMLDivElement>(null);
+  const exportGridRef = useRef<HTMLDivElement>(null); // 이미지 내보내기용 (모든 영역 표시)
 
-  const { data, updateCell, resetData, loadData } = useMandalaData();
-  const { exportToPng, copyToClipboard } = useExport(gridRef);
+  const { data, updateCell, resetData, loadData, activeRegions } = useMandalaData();
+  const { exportToPng, copyToClipboard } = useExport(exportGridRef);
 
   // 모바일 감지
   useEffect(() => {
@@ -90,11 +91,12 @@ export default function MandalaApp() {
           />
         </div>
 
-        {/* 모바일 네비게이션 */}
+        {/* 모바일 네비게이션 (활성화된 영역만 표시) */}
         {isMobile && (
           <MobileNavigation
             currentRegion={currentRegion}
             onRegionChange={setCurrentRegion}
+            activeRegions={activeRegions}
           />
         )}
 
@@ -105,30 +107,31 @@ export default function MandalaApp() {
             data={data}
             onCellChange={updateCell}
             onNavigateToRegion={handleNavigateToRegion}
+            activeRegions={activeRegions}
           />
         ) : (
           <MandalaGrid
             ref={gridRef}
             data={data}
             onCellChange={updateCell}
+            activeRegions={activeRegions}
           />
         )}
 
-        {/* 데스크탑에서만 보이는 전체 그리드 (이미지 내보내기용, 모바일에서는 숨김) */}
-        {isMobile && (
-          <div className="hidden">
-            <MandalaGrid
-              ref={gridRef}
-              data={data}
-              onCellChange={updateCell}
-            />
-          </div>
-        )}
+        {/* 이미지 내보내기용 전체 그리드 (숨김) */}
+        <div className="fixed -left-[9999px] -top-[9999px]">
+          <MandalaGrid
+            ref={exportGridRef}
+            data={data}
+            onCellChange={updateCell}
+            showAllRegions={true}
+          />
+        </div>
 
         {/* 사용법 안내 */}
         <footer className="mt-8 text-center text-xs md:text-sm text-gray-500">
           <p>셀을 클릭하여 내용을 입력하세요. Enter로 저장, ESC로 취소합니다.</p>
-          <p className="mt-1">중앙 영역의 셀을 수정하면 연결된 외곽 영역의 중앙 셀도 자동으로 동기화됩니다.</p>
+          <p className="mt-1">중앙 영역의 모서리에 목표를 입력하면 해당 영역이 활성화됩니다.</p>
         </footer>
       </div>
 
