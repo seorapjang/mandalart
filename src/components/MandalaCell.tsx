@@ -84,7 +84,7 @@ export default function MandalaCell({
   return (
     <div className={cellStyles} onClick={!isEditing ? handleClick : undefined}>
       {isEditing ? (
-        <div className="w-full h-full flex items-center justify-center bg-white">
+        <div className="w-full h-full flex items-center justify-center bg-white ring-2 ring-blue-500">
           <textarea
             ref={inputRef}
             value={editValue}
@@ -93,13 +93,14 @@ export default function MandalaCell({
             onKeyDown={handleKeyDown}
             className={`
               w-full p-1
-              text-center text-sm
+              text-center text-sm leading-tight
               resize-none
               bg-transparent
               focus:outline-none
               ${colors.text}
             `}
-            rows={2}
+            rows={1}
+            style={{ height: 'auto', minHeight: '1.5em', maxHeight: '4em' }}
           />
         </div>
       ) : (
