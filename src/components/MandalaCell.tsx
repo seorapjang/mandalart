@@ -92,15 +92,14 @@ export default function MandalaCell({
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             className={`
-              w-full p-1
+              w-full h-full p-1
               text-center text-sm leading-tight
               resize-none
               bg-transparent
               focus:outline-none
+              overflow-hidden
               ${colors.text}
             `}
-            rows={1}
-            style={{ height: 'auto', minHeight: '1.5em', maxHeight: '4em' }}
           />
         </div>
       ) : (
