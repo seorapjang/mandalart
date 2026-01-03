@@ -23,9 +23,10 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  // 데이터가 있으면 동적 OG 이미지, 없으면 정적 기본 이미지 사용
   const ogImageUrl = typeof encodedData === 'string'
     ? `${baseUrl}/api/og?${URL_PARAM_KEY}=${encodeURIComponent(encodedData)}`
-    : `${baseUrl}/api/og`;
+    : `${baseUrl}/og-image.png`;
 
   return {
     title: `${mainGoal} - 만다라트`,
@@ -36,7 +37,7 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
       images: [
         {
           url: ogImageUrl,
-          width: 600,
+          width: 1200,
           height: 630,
           alt: `${mainGoal} 만다라트`,
         },
