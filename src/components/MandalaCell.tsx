@@ -84,22 +84,24 @@ export default function MandalaCell({
   return (
     <div className={cellStyles} onClick={!isEditing ? handleClick : undefined}>
       {isEditing ? (
-        <textarea
-          ref={inputRef}
-          value={editValue}
-          onChange={(e) => setEditValue(e.target.value)}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          className={`
-            w-full h-full p-1
-            text-center text-sm
-            resize-none
-            bg-white
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-            ${colors.text}
-          `}
-          rows={2}
-        />
+        <div className="w-full h-full flex items-center justify-center bg-white">
+          <textarea
+            ref={inputRef}
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
+            className={`
+              w-full p-1
+              text-center text-sm
+              resize-none
+              bg-transparent
+              focus:outline-none
+              ${colors.text}
+            `}
+            rows={2}
+          />
+        </div>
       ) : (
         <span className="p-1 text-xs sm:text-sm break-words line-clamp-3 overflow-hidden">
           {value || (
