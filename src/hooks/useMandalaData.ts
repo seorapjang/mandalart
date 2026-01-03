@@ -8,6 +8,7 @@ import {
   getRegionAndCellIndex,
   Region,
   Cell,
+  ALL_CELLS,
   CENTER_TO_OUTER_REGION
 } from '@/types/mandala';
 
@@ -24,6 +25,14 @@ const OUTER_REGION_TO_CENTER_CELL: Record<Region, Cell | null> = {
   [Region.BOTTOM_RIGHT]: Cell.BOTTOM_RIGHT,
 };
 
+// 특정 영역의 모든 셀 초기화
+function clearRegion(data: MandalaData, region: Region): void {
+  ALL_CELLS.forEach((cell) => {
+    const index = getGlobalIndex(region, cell);
+    data[index] = '';
+  });
+}
+
 export function useMandalaData(initialData?: MandalaData) {
   const [data, setData] = useState<MandalaData>(initialData || createEmptyMandala());
 
@@ -33,20 +42,35 @@ export function useMandalaData(initialData?: MandalaData) {
       newData[globalIndex] = value;
 
       const { regionIndex, cellIndex } = getRegionAndCellIndex(globalIndex);
+      const isClearing = value.trim() === '';
 
       if (regionIndex === Region.CENTER) {
-        // 중앙 영역의 셀을 수정한 경우 → 외곽 영역의 중앙 셀 동기화
+        // 중앙 영역의 셀을 수정한 경우
         const linkedOuterRegion = CENTER_TO_OUTER_REGION[cellIndex];
         if (linkedOuterRegion !== null) {
-          const outerCenterIndex = getGlobalIndex(linkedOuterRegion, Cell.CENTER);
-          newData[outerCenterIndex] = value;
+          if (isClearing) {
+            // 중앙 영역의 외곽 셀을 지우면 → 해당 외곽 영역 전체 초기화
+            clearRegion(newData, linkedOuterRegion);
+          } else {
+            // 값이 있으면 → 외곽 영역의 중앙 셀만 동기화
+            const outerCenterIndex = getGlobalIndex(linkedOuterRegion, Cell.CENTER);
+            newData[outerCenterIndex] = value;
+          }
         }
       } else if (cellIndex === Cell.CENTER) {
-        // 외곽 영역의 중앙 셀을 수정한 경우 → 중앙 영역의 해당 모서리 셀 동기화
+        // 외곽 영역의 중앙 셀을 수정한 경우
         const linkedCenterCell = OUTER_REGION_TO_CENTER_CELL[regionIndex];
         if (linkedCenterCell !== null) {
-          const centerCellIndex = getGlobalIndex(Region.CENTER, linkedCenterCell);
-          newData[centerCellIndex] = value;
+          if (isClearing) {
+            // 외곽 영역의 중앙 셀을 지우면 → 해당 외곽 영역 전체 초기화 + 중앙 영역 외곽 셀 동기화
+            clearRegion(newData, regionIndex);
+            const centerCellIndex = getGlobalIndex(Region.CENTER, linkedCenterCell);
+            newData[centerCellIndex] = '';
+          } else {
+            // 값이 있으면 → 중앙 영역의 해당 모서리 셀만 동기화
+            const centerCellIndex = getGlobalIndex(Region.CENTER, linkedCenterCell);
+            newData[centerCellIndex] = value;
+          }
         }
       }
 
