@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "만다라트",
     images: [
       {
-        url: "/default-og-image.png",
+        url: "/api/og",
         width: 1200,
         height: 630,
         alt: "만다라트 - 목표 설정 도구",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "만다라트 - 목표 설정 도구",
     description: "만다라트를 쉽게 만들고 공유하세요.",
-    images: ["/default-og-image.png"],
+    images: ["/api/og"],
   },
   robots: {
     index: true,
