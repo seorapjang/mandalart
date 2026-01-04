@@ -34,8 +34,8 @@ const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
             <div
               key={region}
               className={`
-                rounded overflow-hidden transition-all duration-300
-                ${isActive ? 'bg-white' : `${colors.bg} opacity-30`}
+                rounded-lg overflow-hidden transition-all duration-300
+                ${isActive ? 'bg-white' :`${colors.bg} opacity-60`}
               `}
             >
               {isActive ? (

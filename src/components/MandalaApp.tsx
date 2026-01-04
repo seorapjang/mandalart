@@ -74,7 +74,7 @@ export default function MandalaApp() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-bg py-8 px-4">
+    <main className="min-h-screen bg-white py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* 헤더 */}
         <header className="text-center mb-6">

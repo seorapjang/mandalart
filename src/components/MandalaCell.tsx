@@ -70,13 +70,13 @@ export default function MandalaCell({
   const getCornerRadius = () => {
     switch (cell) {
       case Cell.TOP_LEFT:
-        return 'rounded-tl';
+        return 'rounded-tl-lg';
       case Cell.TOP_RIGHT:
-        return 'rounded-tr';
+        return 'rounded-tr-lg';
       case Cell.BOTTOM_LEFT:
-        return 'rounded-bl';
+        return 'rounded-bl-lg';
       case Cell.BOTTOM_RIGHT:
-        return 'rounded-br';
+        return 'rounded-br-lg';
       default:
         return '';
     }
@@ -89,11 +89,11 @@ export default function MandalaCell({
     'text-center',
     colors.bg,
     colors.text,
+    'border border-primary/10',
     'transition-all duration-200',
     'cursor-pointer',
-    isCenter ? 'font-semibold' : '',
-    isMainGoal ? 'font-bold text-lg ring-2 ring-primary' : '',
-    !isEditing && 'hover:brightness-95',
+    isMainGoal ? 'text-primary font-bold text-lg bg-primary/15 border border-primary/50 hover:bg-primary/20': '',
+    !isEditing && 'hover:bg-primary/5 hover:border hover:border-primary/50',
     getCornerRadius(),
   ]
     .filter(Boolean)
@@ -102,7 +102,7 @@ export default function MandalaCell({
   return (
     <div className={cellStyles} onClick={!isEditing ? handleClick : undefined}>
       {isEditing ? (
-        <div className={`w-full h-full flex items-center justify-center ${colors.bg} brightness-105 ring-1 ring-inset ${colors.ring}`}>
+        <div className={`w-full h-full flex items-center justify-center ${colors.bg} brightness-105 ${getCornerRadius()}`}>
           <textarea
             ref={inputRef}
             value={editValue}
@@ -123,7 +123,7 @@ export default function MandalaCell({
       ) : (
         <span className="p-1 text-xs sm:text-sm break-words line-clamp-3 overflow-hidden">
           {value || (
-            <span className="text-muted">
+            <span className={`${isMainGoal ? 'text-primary' : 'text-muted'}`}>
               {forExport ? '-' : isMainGoal ? '핵심목표' : '+'}
             </span>
           )}

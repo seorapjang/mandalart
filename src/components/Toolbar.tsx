@@ -38,8 +38,8 @@ export default function Toolbar({
   };
 
   // 버튼 스타일 (Modern & Trust Blue)
-  const primaryBtn = "px-4 py-2 bg-primary text-white rounded-xl hover:bg-primary-hover active:bg-primary-active transition-colors flex items-center gap-2";
-  const secondaryBtn = "px-4 py-2 bg-surface text-navy border border-slate-border rounded-xl hover:bg-slate-bg transition-colors flex items-center gap-2";
+  const primaryBtn = "font-semibold px-3 py-2 bg-primary/10 text-primary rounded-xl hover:bg-primary/20 active:bg-primary/20 transition-colors flex items-center gap-2 cursor-pointer";
+  const secondaryBtn = "font-semibold px-3 py-2 bg-surface text-navy border border-slate-border rounded-xl hover:bg-slate-bg transition-colors flex items-center gap-2 cursor-pointer";
 
   return (
     <div className="flex flex-wrap gap-2 justify-center">

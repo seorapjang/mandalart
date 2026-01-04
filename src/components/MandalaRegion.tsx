@@ -19,7 +19,7 @@ export default function MandalaRegion({
   forExport = false,
 }: MandalaRegionProps) {
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-0.5 w-full h-full aspect-square">
+    <div className="grid grid-cols-3 grid-rows-3 gap-0.5 p-0.5 w-full h-full aspect-square">
       {ALL_CELLS.map((cell) => {
         const globalIndex = getGlobalIndex(region, cell);
         const isCenter = cell === Cell.CENTER;
