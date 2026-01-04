@@ -78,7 +78,7 @@ export default function MandalaCell({
     'transition-all duration-200',
     'cursor-pointer',
     isCenter ? 'font-semibold' : '',
-    isMainGoal ? 'font-bold text-lg ring-2 ring-lime-600' : '',
+    isMainGoal ? 'font-bold text-lg ring-2 ring-lime-400' : '',
     !isEditing && 'hover:brightness-95',
   ]
     .filter(Boolean)

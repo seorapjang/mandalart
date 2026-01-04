@@ -66,10 +66,10 @@ export const ALL_CELLS: Cell[] = [
 export const COLORS = {
   // 핵심 셀 (중앙 영역 전체 + 외곽 영역의 중앙 셀)
   highlight: {
-    bg: 'bg-lime-400',
-    border: 'border-gray-600',
-    text: 'text-gray-900',
-    ring: 'ring-lime-500',
+    bg: 'bg-lime-200',
+    border: 'border-gray-500',
+    text: 'text-gray-800',
+    ring: 'ring-lime-400',
   },
   // 일반 셀 (외곽 영역의 세부 항목)
   normal: {
