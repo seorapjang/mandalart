@@ -67,18 +67,18 @@ export default function MandalaApp() {
   // 초기화 전에는 로딩 표시
   if (!isInitialized) {
     return (
-      <div className="min-h-screen bg-stone-bg flex items-center justify-center">
+      <div className="min-h-screen bg-slate-bg flex items-center justify-center">
         <div className="text-muted">로딩 중...</div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-stone-bg py-8 px-4">
+    <main className="min-h-screen bg-slate-bg py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* 헤더 */}
         <header className="text-center mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-charcoal mb-2">만다라트</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-navy mb-2">만다라트</h1>
           <p className="text-sm md:text-base text-muted">
             목표를 9개의 세부 목표로 나누고, 각각을 8개의 실행 항목으로 구체화하세요
           </p>

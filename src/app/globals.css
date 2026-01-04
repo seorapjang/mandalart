@@ -1,35 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  /* Primary (Burnt Orange) */
-  --color-primary: #C2410C;
-  --color-primary-hover: #9A3412;
-  --color-primary-active: #7C2D12;
-  --color-primary-soft: #FFF7ED;
+  /* Primary (Blue) */
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-active: #1E40AF;
+  --color-primary-soft: #EFF6FF;
+
+  /* Secondary (Navy) */
+  --color-secondary: #0F172A;
+
+  /* Accent (Lime - 제한적 사용) */
+  --color-accent: #A3E635;
+  --color-accent-soft: #ECFCCB;
+  --color-accent-text: #3F6212;
 
   /* Text */
   --color-text: #0F172A;
   --color-text-muted: #64748B;
 
   /* Background & Surface */
-  --color-bg: #FAFAF9;
+  --color-bg: #F8FAFC;
   --color-surface: #FFFFFF;
 
-  /* Border */
-  --color-border: #E7E5E4;
+  /* Border & Divider */
+  --color-border: #E2E8F0;
+  --color-divider: #E2E8F0;
 
   /* Focus */
-  --color-focus-ring: rgba(194, 65, 12, 0.35);
-
-  /* Accent */
-  --color-accent: #FB923C;
-  --color-accent-soft: #FED7AA;
+  --color-focus-ring: rgba(37, 99, 235, 0.35);
 
   /* Status */
   --color-success: #16A34A;
   --color-warning: #F59E0B;
-  --color-error: #DC2626;
+  --color-error: #EF4444;
   --color-info: #2563EB;
+
+  /* Neutral */
+  --color-neutral-bg: #F1F5F9;
 
   /* Legacy mapping */
   --background: var(--color-bg);
@@ -37,16 +45,28 @@
 }
 
 @theme inline {
-  /* Tailwind v4 커스텀 색상 */
-  --color-burnt: #C2410C;
-  --color-burnt-hover: #9A3412;
-  --color-burnt-active: #7C2D12;
-  --color-burnt-soft: #FFF7ED;
-  --color-charcoal: #0F172A;
+  /* Primary Blue */
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-active: #1E40AF;
+  --color-primary-soft: #EFF6FF;
+
+  /* Accent Lime (제한적 사용) */
+  --color-lime: #A3E635;
+  --color-lime-soft: #ECFCCB;
+  --color-lime-text: #3F6212;
+
+  /* Text */
+  --color-navy: #0F172A;
   --color-muted: #64748B;
-  --color-stone-bg: #FAFAF9;
-  --color-stone-border: #E7E5E4;
-  --color-accent-soft: #FED7AA;
+
+  /* Background & Surface */
+  --color-slate-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-neutral: #F1F5F9;
+
+  /* Border */
+  --color-slate-border: #E2E8F0;
 
   /* Font */
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;

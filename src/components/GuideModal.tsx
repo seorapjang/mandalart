@@ -12,18 +12,18 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* 배경 오버레이 */}
       <div
-        className="absolute inset-0 bg-charcoal/50"
+        className="absolute inset-0 bg-navy/50"
         onClick={onClose}
       />
 
       {/* 모달 컨텐츠 */}
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col border border-stone-border">
+      <div className="relative bg-surface rounded-2xl shadow-xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col border border-slate-border">
         {/* 헤더 */}
-        <div className="flex items-center justify-between p-4 border-b border-stone-border bg-burnt-soft">
-          <h2 className="text-xl font-bold text-charcoal">만다라트 작성 가이드</h2>
+        <div className="flex items-center justify-between p-4 border-b border-slate-border bg-primary-soft">
+          <h2 className="text-xl font-bold text-navy">만다라트 작성 가이드</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-accent-soft rounded-full transition-colors text-charcoal"
+            className="p-2 hover:bg-neutral rounded-full transition-colors text-navy"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -34,18 +34,18 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
         {/* 본문 */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
           {/* 인트로 */}
-          <div className="text-center bg-burnt-soft p-4 rounded-xl">
-            <p className="text-charcoal font-medium">
+          <div className="text-center bg-primary-soft p-4 rounded-xl">
+            <p className="text-navy font-medium">
               만다라트는 할 일 목록이 아니라<br />
-              <span className="text-burnt font-bold">'삶을 어떻게 바꿀지'</span>를 정리하는 도구입니다.
+              <span className="text-primary font-bold">'삶을 어떻게 바꿀지'</span>를 정리하는 도구입니다.
             </p>
             <p className="text-sm text-muted mt-2">아래 순서대로 하나씩만 따라 해보세요.</p>
           </div>
 
           {/* STEP 1 */}
           <section>
-            <h3 className="text-lg font-bold text-burnt mb-3">STEP 1. 가운데 목표부터 정하세요</h3>
-            <p className="text-charcoal mb-3">
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 1. 가운데 목표부터 정하세요</h3>
+            <p className="text-navy mb-3">
               가운데에는 <strong>인생 목표가 아닌, 단기·중기 목표</strong>를 적습니다.
             </p>
             <div className="grid grid-cols-2 gap-3 text-sm">
@@ -60,8 +60,8 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
                 <p className="text-muted">"6개월 안에 에세이를 더 재밌게 쓰기"</p>
               </div>
             </div>
-            <div className="mt-3 text-sm text-muted bg-stone-bg p-3 rounded-xl">
-              <p className="font-medium text-charcoal">👉 기준</p>
+            <div className="mt-3 text-sm text-muted bg-neutral p-3 rounded-xl">
+              <p className="font-medium text-navy">👉 기준</p>
               <ul className="list-disc list-inside mt-1">
                 <li>지금부터 <strong>6개월~1년 안에</strong></li>
                 <li>실제로 삶을 조금 바꿔야 가능한 목표</li>
@@ -71,28 +71,28 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
 
           {/* STEP 2 */}
           <section>
-            <h3 className="text-lg font-bold text-burnt mb-3">STEP 2. 이 목표를 위해 어떤 삶이 필요한지 생각해요</h3>
-            <p className="text-charcoal mb-3">질문은 하나면 충분합니다.</p>
-            <blockquote className="bg-burnt-soft border-l-4 border-burnt p-4 rounded-r-xl">
-              <p className="text-burnt-hover italic">
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 2. 이 목표를 위해 어떤 삶이 필요한지 생각해요</h3>
+            <p className="text-navy mb-3">질문은 하나면 충분합니다.</p>
+            <blockquote className="bg-primary-soft border-l-4 border-primary p-4 rounded-r-xl">
+              <p className="text-primary-hover italic">
                 "이 목표를 이루려면<br />
                 나는 <strong>어떤 사람으로 살아야 할까?</strong>"
               </p>
             </blockquote>
             <p className="text-sm text-muted mt-3">
-              이 질문에서 <strong className="text-charcoal">주변 칸의 방향</strong>이 나옵니다.
+              이 질문에서 <strong className="text-navy">주변 칸의 방향</strong>이 나옵니다.
             </p>
           </section>
 
           {/* STEP 3 */}
           <section>
-            <h3 className="text-lg font-bold text-burnt mb-3">STEP 3. 주변 칸은 '연결된 것'만 적어요</h3>
-            <p className="text-charcoal mb-3">
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 3. 주변 칸은 '연결된 것'만 적어요</h3>
+            <p className="text-navy mb-3">
               주변 칸은 하고 싶은 일을 나열하는 곳이 아닙니다.<br />
               <strong>가운데 목표에 실제로 도움이 되는 것만</strong> 적습니다.
             </p>
-            <div className="bg-burnt-soft p-3 rounded-xl mb-3">
-              <p className="text-burnt font-medium">🎯 예시 - 가운데 목표: <em>에세이를 더 재밌게 쓰기</em></p>
+            <div className="bg-primary-soft p-3 rounded-xl mb-3">
+              <p className="text-primary font-medium">🎯 예시 - 가운데 목표: <em>에세이를 더 재밌게 쓰기</em></p>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="bg-green-50 p-3 rounded-xl border border-green-100">
@@ -112,29 +112,29 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
                 </ul>
               </div>
             </div>
-            <div className="mt-3 text-sm text-muted bg-stone-bg p-3 rounded-xl">
-              <p className="font-medium text-charcoal">👉 체크 질문</p>
+            <div className="mt-3 text-sm text-muted bg-neutral p-3 rounded-xl">
+              <p className="font-medium text-navy">👉 체크 질문</p>
               <p className="mt-1">"이걸 하면 중심 목표에 가까워질까?"</p>
             </div>
           </section>
 
           {/* STEP 4 */}
           <section>
-            <h3 className="text-lg font-bold text-burnt mb-3">STEP 4. 전부 채우지 않아도 괜찮아요</h3>
-            <p className="text-charcoal mb-3">64칸을 다 채우지 않아도 됩니다.</p>
-            <ul className="text-charcoal space-y-1 mb-3">
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 4. 전부 채우지 않아도 괜찮아요</h3>
+            <p className="text-navy mb-3">64칸을 다 채우지 않아도 됩니다.</p>
+            <ul className="text-navy space-y-1 mb-3">
               <li>• 처음엔 <strong>1칸만</strong> 해도 충분해요</li>
               <li>• 많아질수록 실행 확률은 낮아집니다</li>
             </ul>
-            <div className="bg-burnt-soft p-3 rounded-xl text-burnt-hover italic">
+            <div className="bg-primary-soft p-3 rounded-xl text-primary-hover italic">
               👉 <em>한 칸을 꾸준히 실행하는 게<br />여덟 칸을 적어두는 것보다 낫습니다.</em>
             </div>
           </section>
 
           {/* STEP 5 */}
           <section>
-            <h3 className="text-lg font-bold text-burnt mb-3">STEP 5. 시간 계획이 없으면 실행되지 않아요</h3>
-            <p className="text-charcoal mb-3">계획은 <strong>시간이 들어가야</strong> 작동합니다.</p>
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 5. 시간 계획이 없으면 실행되지 않아요</h3>
+            <p className="text-navy mb-3">계획은 <strong>시간이 들어가야</strong> 작동합니다.</p>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="bg-red-50 p-3 rounded-xl border border-red-100">
                 <p className="text-red-600 font-medium mb-1">❌ 피해야 할 예시</p>
@@ -147,8 +147,8 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
                 <p className="text-muted">"기존 공부 시간 중 일부를 전환하기"</p>
               </div>
             </div>
-            <div className="mt-3 text-sm text-muted bg-stone-bg p-3 rounded-xl">
-              <p className="font-medium text-charcoal">👉 기준</p>
+            <div className="mt-3 text-sm text-muted bg-neutral p-3 rounded-xl">
+              <p className="font-medium text-navy">👉 기준</p>
               <ul className="list-disc list-inside mt-1">
                 <li><strong>새 시간을 만들기보다</strong></li>
                 <li>이미 쓰고 있는 시간 안에 끼워 넣기</li>
@@ -158,20 +158,20 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
 
           {/* STEP 6 */}
           <section>
-            <h3 className="text-lg font-bold text-burnt mb-3">STEP 6. 욕심내지 말고, 느슨하게 가세요</h3>
-            <p className="text-charcoal mb-3">빽빽한 계획은 오래가지 않습니다.</p>
-            <ul className="text-charcoal space-y-1 mb-3">
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 6. 욕심내지 말고, 느슨하게 가세요</h3>
+            <p className="text-navy mb-3">빽빽한 계획은 오래가지 않습니다.</p>
+            <ul className="text-navy space-y-1 mb-3">
               <li>• 하루를 바꾸는 계획 ❌</li>
               <li>• <strong>삶의 방향을 조금 조정하는 계획</strong> ⭕</li>
             </ul>
-            <div className="bg-burnt-soft p-3 rounded-xl text-burnt-hover">
+            <div className="bg-primary-soft p-3 rounded-xl text-primary-hover">
               👉 목표는 달성보다 <strong>지속</strong>이 더 중요합니다.
             </div>
           </section>
 
           {/* 마무리 */}
-          <div className="text-center bg-stone-bg p-4 rounded-xl">
-            <p className="text-charcoal">
+          <div className="text-center bg-neutral p-4 rounded-xl">
+            <p className="text-navy">
               <strong>만다라트는 마법의 도구가 아닙니다.</strong><br />
               하지만 삶을 정렬하는 데는 아주 강력한 도구입니다.
             </p>
@@ -179,10 +179,10 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
         </div>
 
         {/* 푸터 */}
-        <div className="p-4 border-t border-stone-border bg-stone-bg">
+        <div className="p-4 border-t border-slate-border bg-neutral">
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-burnt text-white rounded-xl hover:bg-burnt-hover active:bg-burnt-active transition-colors font-medium"
+            className="w-full py-2.5 bg-primary text-white rounded-xl hover:bg-primary-hover active:bg-primary-active transition-colors font-medium"
           >
             시작하기
           </button>

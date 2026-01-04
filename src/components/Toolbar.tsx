@@ -37,9 +37,9 @@ export default function Toolbar({
     }
   };
 
-  // 버튼 스타일
-  const primaryBtn = "px-4 py-2 bg-burnt text-white rounded-xl hover:bg-burnt-hover active:bg-burnt-active transition-colors flex items-center gap-2";
-  const secondaryBtn = "px-4 py-2 bg-white text-charcoal border border-stone-border rounded-xl hover:bg-stone-bg transition-colors flex items-center gap-2";
+  // 버튼 스타일 (Modern & Trust Blue)
+  const primaryBtn = "px-4 py-2 bg-primary text-white rounded-xl hover:bg-primary-hover active:bg-primary-active transition-colors flex items-center gap-2";
+  const secondaryBtn = "px-4 py-2 bg-surface text-navy border border-slate-border rounded-xl hover:bg-slate-bg transition-colors flex items-center gap-2";
 
   return (
     <div className="flex flex-wrap gap-2 justify-center">

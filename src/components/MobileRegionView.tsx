@@ -29,7 +29,7 @@ export default function MobileRegionView({
         </p>
         <button
           onClick={() => onNavigateToRegion(Region.CENTER)}
-          className="px-4 py-2 bg-burnt-soft text-burnt rounded-xl font-medium hover:bg-accent-soft transition-colors"
+          className="px-4 py-2 bg-primary-soft text-primary rounded-xl font-medium hover:bg-neutral transition-colors"
         >
           중앙 영역으로 이동
         </button>
@@ -59,7 +59,7 @@ export default function MobileRegionView({
       {region !== Region.CENTER && (
         <button
           onClick={() => onNavigateToRegion(Region.CENTER)}
-          className="w-full mt-4 py-2 bg-burnt-soft text-burnt rounded-xl font-medium hover:bg-accent-soft transition-colors"
+          className="w-full mt-4 py-2 bg-primary-soft text-primary rounded-xl font-medium hover:bg-neutral transition-colors"
         >
           중앙 영역으로 돌아가기
         </button>

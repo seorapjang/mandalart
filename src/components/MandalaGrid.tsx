@@ -24,7 +24,7 @@ const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
     return (
       <div
         ref={ref}
-        className="grid grid-cols-3 grid-rows-3 gap-1 w-full max-w-3xl mx-auto aspect-square bg-stone-border p-1 rounded-xl"
+        className="grid grid-cols-3 grid-rows-3 gap-1 w-full max-w-3xl mx-auto aspect-square bg-slate-border p-1 rounded-xl"
       >
         {ALL_REGIONS.map((region) => {
           const isActive = shouldShowRegion(region);

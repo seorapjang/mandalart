@@ -62,18 +62,18 @@ export const ALL_CELLS: Cell[] = [
   Cell.BOTTOM_RIGHT,
 ];
 
-// 색상 정의 (Burnt Orange 디자인 시스템)
+// 색상 정의 (Modern & Trust Blue 디자인 시스템)
 const HIGHLIGHT = {
-  bg: 'bg-accent-soft',  // #FED7AA
-  border: 'border-stone-border',
-  text: 'text-charcoal',
-  ring: 'ring-burnt/35'
+  bg: 'bg-primary-soft',  // #EFF6FF (Blue tint)
+  border: 'border-slate-border',
+  text: 'text-navy',
+  ring: 'ring-primary/35'
 };
 const NORMAL = {
   bg: 'bg-white',
-  border: 'border-stone-border',
-  text: 'text-charcoal',
-  ring: 'ring-burnt/35'
+  border: 'border-slate-border',
+  text: 'text-navy',
+  ring: 'ring-primary/35'
 };
 
 // 영역별 색상 (심플한 스타일: 중앙만 강조)
