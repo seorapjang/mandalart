@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Region, Cell, REGION_COLORS, COLORS } from '@/types/mandala';
+import { Region, Cell, REGION_COLORS } from '@/types/mandala';
 
 interface MandalaCellProps {
   value: string;
@@ -25,10 +25,7 @@ export default function MandalaCell({
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  // 색상 결정: 중앙 영역 전체 또는 외곽 영역의 중앙 셀이면 연두색
-  const isCenterRegion = region === Region.CENTER;
-  const colors = isCenterRegion || isCenter ? COLORS.highlight : COLORS.normal;
+  const colors = REGION_COLORS[region];
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -78,7 +75,7 @@ export default function MandalaCell({
     'transition-all duration-200',
     'cursor-pointer',
     isCenter ? 'font-semibold' : '',
-    isMainGoal ? 'font-bold text-lg ring-2 ring-lime-400' : '',
+    isMainGoal ? 'font-bold text-lg ring-2 ring-orange-500' : '',
     !isEditing && 'hover:brightness-95',
   ]
     .filter(Boolean)
