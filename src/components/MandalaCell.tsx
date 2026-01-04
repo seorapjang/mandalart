@@ -87,8 +87,6 @@ export default function MandalaCell({
     'w-full h-full',
     'flex items-center justify-center',
     'text-center',
-    'border',
-    colors.border,
     colors.bg,
     colors.text,
     'transition-all duration-200',
