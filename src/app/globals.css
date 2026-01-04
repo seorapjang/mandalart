@@ -1,18 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3f4f6;
-  --foreground: #171717;
+  /* Primary (Burnt Orange) */
+  --color-primary: #C2410C;
+  --color-primary-hover: #9A3412;
+  --color-primary-active: #7C2D12;
+  --color-primary-soft: #FFF7ED;
+
+  /* Text */
+  --color-text: #0F172A;
+  --color-text-muted: #64748B;
+
+  /* Background & Surface */
+  --color-bg: #FAFAF9;
+  --color-surface: #FFFFFF;
+
+  /* Border */
+  --color-border: #E7E5E4;
+
+  /* Focus */
+  --color-focus-ring: rgba(194, 65, 12, 0.35);
+
+  /* Accent */
+  --color-accent: #FB923C;
+  --color-accent-soft: #FED7AA;
+
+  /* Status */
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+  --color-info: #2563EB;
+
+  /* Legacy mapping */
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Tailwind v4 커스텀 색상 */
+  --color-burnt: #C2410C;
+  --color-burnt-hover: #9A3412;
+  --color-burnt-active: #7C2D12;
+  --color-burnt-soft: #FFF7ED;
+  --color-charcoal: #0F172A;
+  --color-muted: #64748B;
+  --color-stone-bg: #FAFAF9;
+  --color-stone-border: #E7E5E4;
+  --color-accent-soft: #FED7AA;
+
+  /* Font */
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }

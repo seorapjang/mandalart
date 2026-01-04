@@ -75,7 +75,7 @@ export default function MandalaCell({
     'transition-all duration-200',
     'cursor-pointer',
     isCenter ? 'font-semibold' : '',
-    isMainGoal ? 'font-bold text-lg ring-2 ring-orange-500' : '',
+    isMainGoal ? 'font-bold text-lg ring-2 ring-burnt' : '',
     !isEditing && 'hover:brightness-95',
   ]
     .filter(Boolean)
@@ -105,7 +105,7 @@ export default function MandalaCell({
       ) : (
         <span className="p-1 text-xs sm:text-sm break-words line-clamp-3 overflow-hidden">
           {value || (
-            <span className="text-gray-400">
+            <span className="text-muted">
               {forExport ? '-' : isMainGoal ? '핵심목표' : '+'}
             </span>
           )}

@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
                   display: 'flex',
                   fontSize: content.title.length > 12 ? '56px' : '72px',
                   fontWeight: 'bold',
-                  color: '#ea580c',
+                  color: '#C2410C',
                   lineHeight: 1.1,
                   textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
                 }}

@@ -67,19 +67,19 @@ export default function MandalaApp() {
   // 초기화 전에는 로딩 표시
   if (!isInitialized) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-gray-500">로딩 중...</div>
+      <div className="min-h-screen bg-stone-bg flex items-center justify-center">
+        <div className="text-muted">로딩 중...</div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 py-8 px-4">
+    <main className="min-h-screen bg-stone-bg py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* 헤더 */}
         <header className="text-center mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">만다라트</h1>
-          <p className="text-sm md:text-base text-gray-600">
+          <h1 className="text-2xl md:text-3xl font-bold text-charcoal mb-2">만다라트</h1>
+          <p className="text-sm md:text-base text-muted">
             목표를 9개의 세부 목표로 나누고, 각각을 8개의 실행 항목으로 구체화하세요
           </p>
         </header>
@@ -136,7 +136,7 @@ export default function MandalaApp() {
         </div>
 
         {/* 사용법 안내 */}
-        <footer className="mt-8 text-center text-xs md:text-sm text-gray-500">
+        <footer className="mt-8 text-center text-xs md:text-sm text-muted">
           <p>셀을 클릭하여 내용을 입력하세요. Enter로 저장, ESC로 취소합니다.</p>
           <p className="mt-1">중앙 영역의 모서리에 목표를 입력하면 해당 영역이 활성화됩니다.</p>
         </footer>

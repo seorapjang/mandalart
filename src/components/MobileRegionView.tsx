@@ -24,12 +24,12 @@ export default function MobileRegionView({
   if (!isRegionActive) {
     return (
       <div className="w-full max-w-sm mx-auto text-center py-8">
-        <p className="text-gray-500 mb-4">
+        <p className="text-muted mb-4">
           이 영역은 아직 활성화되지 않았습니다.
         </p>
         <button
           onClick={() => onNavigateToRegion(Region.CENTER)}
-          className="px-4 py-2 bg-orange-100 text-orange-900 rounded-lg font-medium hover:bg-orange-200 transition-colors"
+          className="px-4 py-2 bg-burnt-soft text-burnt rounded-xl font-medium hover:bg-accent-soft transition-colors"
         >
           중앙 영역으로 이동
         </button>
@@ -50,7 +50,7 @@ export default function MobileRegionView({
 
       {/* 중앙 영역일 때 안내 메시지 */}
       {region === Region.CENTER && (
-        <p className="text-center text-sm text-gray-500 mt-2">
+        <p className="text-center text-sm text-muted mt-2">
           모서리에 하위 목표를 입력하면 해당 영역이 활성화됩니다
         </p>
       )}
@@ -59,7 +59,7 @@ export default function MobileRegionView({
       {region !== Region.CENTER && (
         <button
           onClick={() => onNavigateToRegion(Region.CENTER)}
-          className="w-full mt-4 py-2 bg-orange-100 text-orange-900 rounded-lg font-medium hover:bg-orange-200 transition-colors"
+          className="w-full mt-4 py-2 bg-burnt-soft text-burnt rounded-xl font-medium hover:bg-accent-soft transition-colors"
         >
           중앙 영역으로 돌아가기
         </button>

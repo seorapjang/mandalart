@@ -91,7 +91,7 @@ export default function MobileNavigation({
               px-3 py-1.5 rounded-md text-sm font-medium
               transition-all duration-200
               ${colors.bg} ${colors.text}
-              ${isCurrent ? 'ring-2 ring-offset-1 ring-gray-800 scale-105' : 'opacity-70 hover:opacity-100'}
+              ${isCurrent ? 'ring-2 ring-offset-1 ring-burnt scale-105' : 'opacity-70 hover:opacity-100'}
             `}
           >
             {getRegionLabel(region)}

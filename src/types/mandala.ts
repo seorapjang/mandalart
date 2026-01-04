@@ -62,9 +62,19 @@ export const ALL_CELLS: Cell[] = [
   Cell.BOTTOM_RIGHT,
 ];
 
-// 색상 정의
-const HIGHLIGHT = { bg: 'bg-orange-200', border: 'border-orange-300', text: 'text-gray-800', ring: 'ring-orange-400' };
-const NORMAL = { bg: 'bg-white', border: 'border-gray-300', text: 'text-gray-800', ring: 'ring-gray-400' };
+// 색상 정의 (Burnt Orange 디자인 시스템)
+const HIGHLIGHT = {
+  bg: 'bg-accent-soft',  // #FED7AA
+  border: 'border-stone-border',
+  text: 'text-charcoal',
+  ring: 'ring-burnt/35'
+};
+const NORMAL = {
+  bg: 'bg-white',
+  border: 'border-stone-border',
+  text: 'text-charcoal',
+  ring: 'ring-burnt/35'
+};
 
 // 영역별 색상 (심플한 스타일: 중앙만 강조)
 export const REGION_COLORS: Record<Region, { bg: string; border: string; text: string; ring: string }> = {

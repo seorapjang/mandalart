@@ -24,7 +24,7 @@ const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
     return (
       <div
         ref={ref}
-        className="grid grid-cols-3 grid-rows-3 gap-1 w-full max-w-3xl mx-auto aspect-square bg-gray-200 p-1 rounded-lg"
+        className="grid grid-cols-3 grid-rows-3 gap-1 w-full max-w-3xl mx-auto aspect-square bg-stone-border p-1 rounded-xl"
       >
         {ALL_REGIONS.map((region) => {
           const isActive = shouldShowRegion(region);
@@ -50,7 +50,7 @@ const MandalaGrid = forwardRef<HTMLDivElement, MandalaGridProps>(
                 <div className="w-full h-full" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-gray-400 text-xs text-center p-2">
+                  <div className="text-muted text-xs text-center p-2">
                     중앙 영역에서<br />목표를 입력하세요
                   </div>
                 </div>
