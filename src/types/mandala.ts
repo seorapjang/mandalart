@@ -62,17 +62,35 @@ export const ALL_CELLS: Cell[] = [
   Cell.BOTTOM_RIGHT,
 ];
 
-// 영역별 색상
+// 색상 정의
+export const COLORS = {
+  // 핵심 셀 (중앙 영역 전체 + 외곽 영역의 중앙 셀)
+  highlight: {
+    bg: 'bg-lime-400',
+    border: 'border-gray-600',
+    text: 'text-gray-900',
+    ring: 'ring-lime-500',
+  },
+  // 일반 셀 (외곽 영역의 세부 항목)
+  normal: {
+    bg: 'bg-white',
+    border: 'border-gray-400',
+    text: 'text-gray-900',
+    ring: 'ring-gray-400',
+  },
+};
+
+// 영역별 색상 (하위 호환성 유지, 실제로는 COLORS 사용)
 export const REGION_COLORS: Record<Region, { bg: string; border: string; text: string; ring: string }> = {
-  [Region.TOP_LEFT]: { bg: 'bg-blue-100', border: 'border-blue-300', text: 'text-blue-900', ring: 'ring-blue-400' },
-  [Region.TOP]: { bg: 'bg-emerald-100', border: 'border-emerald-300', text: 'text-emerald-900', ring: 'ring-emerald-400' },
-  [Region.TOP_RIGHT]: { bg: 'bg-pink-100', border: 'border-pink-300', text: 'text-pink-900', ring: 'ring-pink-400' },
-  [Region.LEFT]: { bg: 'bg-indigo-100', border: 'border-indigo-300', text: 'text-indigo-900', ring: 'ring-indigo-400' },
-  [Region.CENTER]: { bg: 'bg-amber-100', border: 'border-amber-400', text: 'text-amber-900', ring: 'ring-amber-500' },
-  [Region.RIGHT]: { bg: 'bg-red-100', border: 'border-red-300', text: 'text-red-900', ring: 'ring-red-400' },
-  [Region.BOTTOM_LEFT]: { bg: 'bg-cyan-100', border: 'border-cyan-300', text: 'text-cyan-900', ring: 'ring-cyan-400' },
-  [Region.BOTTOM]: { bg: 'bg-purple-100', border: 'border-purple-300', text: 'text-purple-900', ring: 'ring-purple-400' },
-  [Region.BOTTOM_RIGHT]: { bg: 'bg-lime-100', border: 'border-lime-300', text: 'text-lime-900', ring: 'ring-lime-400' },
+  [Region.TOP_LEFT]: COLORS.normal,
+  [Region.TOP]: COLORS.normal,
+  [Region.TOP_RIGHT]: COLORS.normal,
+  [Region.LEFT]: COLORS.normal,
+  [Region.CENTER]: COLORS.highlight,
+  [Region.RIGHT]: COLORS.normal,
+  [Region.BOTTOM_LEFT]: COLORS.normal,
+  [Region.BOTTOM]: COLORS.normal,
+  [Region.BOTTOM_RIGHT]: COLORS.normal,
 };
 
 // 영역의 9x9 그리드 내 시작 위치 (row, col)
