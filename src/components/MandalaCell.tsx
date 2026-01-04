@@ -102,7 +102,7 @@ export default function MandalaCell({
   return (
     <div className={cellStyles} onClick={!isEditing ? handleClick : undefined}>
       {isEditing ? (
-        <div className={`w-full h-full flex items-center justify-center ${colors.bg} brightness-105 ring-2 ${colors.ring}`}>
+        <div className={`w-full h-full flex items-center justify-center ${colors.bg} brightness-105 ring-1 ring-inset ${colors.ring}`}>
           <textarea
             ref={inputRef}
             value={editValue}
