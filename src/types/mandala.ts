@@ -62,17 +62,21 @@ export const ALL_CELLS: Cell[] = [
   Cell.BOTTOM_RIGHT,
 ];
 
-// 영역별 색상 (OG 이미지 배경과 유사한 파스텔톤)
+// 색상 정의
+const HIGHLIGHT = { bg: 'bg-orange-200', border: 'border-orange-300', text: 'text-gray-800', ring: 'ring-orange-400' };
+const NORMAL = { bg: 'bg-white', border: 'border-gray-300', text: 'text-gray-800', ring: 'ring-gray-400' };
+
+// 영역별 색상 (심플한 스타일: 중앙만 강조)
 export const REGION_COLORS: Record<Region, { bg: string; border: string; text: string; ring: string }> = {
-  [Region.TOP_LEFT]: { bg: 'bg-sky-200', border: 'border-sky-300', text: 'text-sky-900', ring: 'ring-sky-400' },
-  [Region.TOP]: { bg: 'bg-rose-200', border: 'border-rose-300', text: 'text-rose-900', ring: 'ring-rose-400' },
-  [Region.TOP_RIGHT]: { bg: 'bg-lime-200', border: 'border-lime-300', text: 'text-lime-900', ring: 'ring-lime-400' },
-  [Region.LEFT]: { bg: 'bg-amber-200', border: 'border-amber-300', text: 'text-amber-900', ring: 'ring-amber-400' },
-  [Region.CENTER]: { bg: 'bg-orange-300', border: 'border-orange-400', text: 'text-orange-900', ring: 'ring-orange-500' },
-  [Region.RIGHT]: { bg: 'bg-yellow-200', border: 'border-yellow-300', text: 'text-yellow-900', ring: 'ring-yellow-400' },
-  [Region.BOTTOM_LEFT]: { bg: 'bg-teal-200', border: 'border-teal-300', text: 'text-teal-900', ring: 'ring-teal-400' },
-  [Region.BOTTOM]: { bg: 'bg-orange-200', border: 'border-orange-300', text: 'text-orange-900', ring: 'ring-orange-400' },
-  [Region.BOTTOM_RIGHT]: { bg: 'bg-green-200', border: 'border-green-300', text: 'text-green-900', ring: 'ring-green-400' },
+  [Region.TOP_LEFT]: NORMAL,
+  [Region.TOP]: NORMAL,
+  [Region.TOP_RIGHT]: NORMAL,
+  [Region.LEFT]: NORMAL,
+  [Region.CENTER]: HIGHLIGHT,
+  [Region.RIGHT]: NORMAL,
+  [Region.BOTTOM_LEFT]: NORMAL,
+  [Region.BOTTOM]: NORMAL,
+  [Region.BOTTOM_RIGHT]: NORMAL,
 };
 
 // 영역의 9x9 그리드 내 시작 위치 (row, col)
