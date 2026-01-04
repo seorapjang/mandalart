@@ -25,7 +25,10 @@ export default function MandalaCell({
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const colors = REGION_COLORS[region];
+
+  // 외곽 영역의 중앙 셀은 중앙 그리드 색상 사용
+  const shouldUseHighlight = isCenter && region !== Region.CENTER;
+  const colors = shouldUseHighlight ? REGION_COLORS[Region.CENTER] : REGION_COLORS[region];
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
