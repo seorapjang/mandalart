@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
               <div
                 style={{
                   display: 'flex',
-                  fontSize: content.title.length > 12 ? '56px' : '72px',
+                  fontSize: content.title.length > 12 ? '48px' : '56px',
                   fontWeight: 'bold',
                   color: '#2563EB',
                   lineHeight: 1.1,
