@@ -66,6 +66,22 @@ export default function MandalaCell({
     [handleBlur, value]
   );
 
+  // 꼭짓점 셀에 대한 border-radius 결정
+  const getCornerRadius = () => {
+    switch (cell) {
+      case Cell.TOP_LEFT:
+        return 'rounded-tl';
+      case Cell.TOP_RIGHT:
+        return 'rounded-tr';
+      case Cell.BOTTOM_LEFT:
+        return 'rounded-bl';
+      case Cell.BOTTOM_RIGHT:
+        return 'rounded-br';
+      default:
+        return '';
+    }
+  };
+
   // 스타일 결정
   const cellStyles = [
     'w-full h-full',
@@ -80,6 +96,7 @@ export default function MandalaCell({
     isCenter ? 'font-semibold' : '',
     isMainGoal ? 'font-bold text-lg ring-2 ring-primary' : '',
     !isEditing && 'hover:brightness-95',
+    getCornerRadius(),
   ]
     .filter(Boolean)
     .join(' ');
