@@ -149,3 +149,12 @@ export function createEmptyMandala(): MandalaData {
 
 // 중앙 영역의 중앙 셀 (메인 목표) 인덱스
 export const MAIN_GOAL_INDEX = getGlobalIndex(Region.CENTER, Cell.CENTER); // 40
+
+// 저장된 만다라트 타입
+export interface SavedMandala {
+  id: string;           // 고유 ID (timestamp 기반)
+  name: string;         // 핵심 목표 또는 사용자 수정 이름
+  data: MandalaData;    // 81칸 데이터
+  createdAt: number;    // 생성 시간
+  updatedAt: number;    // 수정 시간
+}

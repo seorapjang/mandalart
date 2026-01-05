@@ -5,17 +5,21 @@ import MandalaGrid from '@/components/MandalaGrid';
 import Toolbar from '@/components/Toolbar';
 import TemplateSelector from '@/components/TemplateSelector';
 import GuideModal from '@/components/GuideModal';
+import SavedMandalaModal from '@/components/SavedMandalaModal';
 import MobileNavigation from '@/components/MobileNavigation';
 import MobileRegionView from '@/components/MobileRegionView';
 import { useMandalaData } from '@/hooks/useMandalaData';
+import { useSavedMandalas } from '@/hooks/useSavedMandalas';
 import { useExport } from '@/hooks/useExport';
 import { getMandalaDataFromUrl } from '@/lib/encoder';
 import { MandalaTemplate } from '@/lib/templates';
-import { Region } from '@/types/mandala';
+import { Region, MandalaData } from '@/types/mandala';
 
 export default function MandalaApp() {
   const [isTemplateOpen, setIsTemplateOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isSavedListOpen, setIsSavedListOpen] = useState(false);
+  const [showSaveToast, setShowSaveToast] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isMobile, setIsMobile] = useState<boolean | null>(null); // null = 아직 결정 안됨
   const [currentRegion, setCurrentRegion] = useState<Region>(Region.CENTER); // 중앙 영역으로 시작
@@ -23,6 +27,7 @@ export default function MandalaApp() {
   const exportGridRef = useRef<HTMLDivElement>(null); // 이미지 내보내기용 (모든 영역 표시)
 
   const { data, updateCell, resetData, loadData, activeRegions } = useMandalaData();
+  const { savedList, saveMandala, deleteMandala, updateName } = useSavedMandalas();
   const { exportToPng, copyToClipboard } = useExport(exportGridRef);
 
   // 내보내기 그리드 강제 재렌더링을 위한 키
@@ -64,6 +69,17 @@ export default function MandalaApp() {
     setCurrentRegion(region);
   };
 
+  const handleSave = () => {
+    saveMandala(data);
+    setShowSaveToast(true);
+    setTimeout(() => setShowSaveToast(false), 2000);
+  };
+
+  const handleLoadSaved = (savedData: MandalaData) => {
+    loadData(savedData);
+    setCurrentRegion(Region.CENTER);
+  };
+
   // 초기화 전에는 로딩 표시
   if (!isInitialized) {
     return (
@@ -93,6 +109,8 @@ export default function MandalaApp() {
             onReset={handleReset}
             onSelectTemplate={() => setIsTemplateOpen(true)}
             onOpenGuide={() => setIsGuideOpen(true)}
+            onSave={handleSave}
+            onOpenSavedList={() => setIsSavedListOpen(true)}
           />
         </div>
 
@@ -154,6 +172,23 @@ export default function MandalaApp() {
         isOpen={isGuideOpen}
         onClose={() => setIsGuideOpen(false)}
       />
+
+      {/* 저장된 만다라트 모달 */}
+      <SavedMandalaModal
+        isOpen={isSavedListOpen}
+        onClose={() => setIsSavedListOpen(false)}
+        savedList={savedList}
+        onLoad={handleLoadSaved}
+        onDelete={deleteMandala}
+        onUpdateName={updateName}
+      />
+
+      {/* 저장 완료 토스트 */}
+      {showSaveToast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-navy text-white px-4 py-2 rounded-xl shadow-lg z-50 animate-fade-in">
+          저장되었습니다
+        </div>
+      )}
     </main>
   );
 }
