@@ -3,19 +3,23 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import MandalaGrid from '@/components/MandalaGrid';
 import Toolbar from '@/components/Toolbar';
-import TemplateSelector from '@/components/TemplateSelector';
 import GuideModal from '@/components/GuideModal';
+import SavedMandalaModal from '@/components/SavedMandalaModal';
+import ExamplePreviewModal from '@/components/ExamplePreviewModal';
 import MobileNavigation from '@/components/MobileNavigation';
 import MobileRegionView from '@/components/MobileRegionView';
 import { useMandalaData } from '@/hooks/useMandalaData';
+import { useSavedMandalas } from '@/hooks/useSavedMandalas';
 import { useExport } from '@/hooks/useExport';
 import { getMandalaDataFromUrl } from '@/lib/encoder';
 import { MandalaTemplate } from '@/lib/templates';
-import { Region } from '@/types/mandala';
+import { Region, MandalaData } from '@/types/mandala';
 
 export default function MandalaApp() {
-  const [isTemplateOpen, setIsTemplateOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isSavedListOpen, setIsSavedListOpen] = useState(false);
+  const [selectedExample, setSelectedExample] = useState<MandalaTemplate | null>(null);
+  const [showSaveToast, setShowSaveToast] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isMobile, setIsMobile] = useState<boolean | null>(null); // null = 아직 결정 안됨
   const [currentRegion, setCurrentRegion] = useState<Region>(Region.CENTER); // 중앙 영역으로 시작
@@ -23,6 +27,7 @@ export default function MandalaApp() {
   const exportGridRef = useRef<HTMLDivElement>(null); // 이미지 내보내기용 (모든 영역 표시)
 
   const { data, updateCell, resetData, loadData, activeRegions } = useMandalaData();
+  const { savedList, saveMandala, deleteMandala, updateName } = useSavedMandalas();
   const { exportToPng, copyToClipboard } = useExport(exportGridRef);
 
   // 내보내기 그리드 강제 재렌더링을 위한 키
@@ -47,10 +52,6 @@ export default function MandalaApp() {
     return () => window.removeEventListener('resize', checkMobile);
   }, [loadData]);
 
-  const handleSelectTemplate = (template: MandalaTemplate) => {
-    loadData([...template.data]); // 깊은 복사
-  };
-
   const handleReset = () => {
     if (confirm('모든 내용을 초기화하시겠습니까?')) {
       resetData();
@@ -62,6 +63,17 @@ export default function MandalaApp() {
 
   const handleNavigateToRegion = (region: Region) => {
     setCurrentRegion(region);
+  };
+
+  const handleSave = () => {
+    saveMandala(data);
+    setShowSaveToast(true);
+    setTimeout(() => setShowSaveToast(false), 2000);
+  };
+
+  const handleLoadSaved = (savedData: MandalaData) => {
+    loadData(savedData);
+    setCurrentRegion(Region.CENTER);
   };
 
   // 초기화 전에는 로딩 표시
@@ -91,8 +103,10 @@ export default function MandalaApp() {
             onExportPng={exportToPng}
             onCopyToClipboard={copyToClipboard}
             onReset={handleReset}
-            onSelectTemplate={() => setIsTemplateOpen(true)}
             onOpenGuide={() => setIsGuideOpen(true)}
+            onSave={handleSave}
+            onOpenSavedList={() => setIsSavedListOpen(true)}
+            onSelectExample={setSelectedExample}
           />
         </div>
 
@@ -140,48 +154,38 @@ export default function MandalaApp() {
           <p>셀을 클릭하여 내용을 입력하세요. Enter로 저장, ESC로 취소합니다.</p>
           <p className="mt-1">중앙 영역의 모서리에 목표를 입력하면 해당 영역이 활성화됩니다.</p>
         </footer>
-
-        {/* SEO 콘텐츠 */}
-        <section className="mt-16 pt-8 border-t border-slate-200">
-          <h2 className="text-lg font-semibold text-navy mb-4">만다라트란?</h2>
-          <div className="text-sm text-muted space-y-3">
-            <p>
-              <strong>만다라트(Mandalart)</strong>는 목표 생성과 계획 수립을 위한 강력한 도구입니다.
-              일본의 디자이너 이마이즈미 히로아키가 개발한 이 방법은 중심 목표를 8개의 세부 목표로 나누고,
-              각 세부 목표를 다시 8개의 실행 항목으로 구체화하여 총 72개의 행동 계획을 만들어냅니다.
-            </p>
-            <p>
-              야구 선수 오타니 쇼헤이가 고등학교 시절 &quot;8개 구단 드래프트 1순위&quot;라는 목표를 달성하기 위해
-              만다라트를 활용한 것으로 유명해졌습니다. 그는 이 도구를 통해 체력, 멘탈, 기술 등
-              다양한 영역의 실행 계획을 체계적으로 수립했습니다.
-            </p>
-            <h3 className="text-base font-medium text-navy pt-2">만다라트 사용법</h3>
-            <ol className="list-decimal list-inside space-y-1 pl-2">
-              <li>중앙에 핵심 목표를 입력합니다</li>
-              <li>핵심 목표 주변 8칸에 세부 목표를 작성합니다</li>
-              <li>각 세부 목표가 외곽 영역의 중심이 되어 8개의 실행 항목으로 확장됩니다</li>
-              <li>72개의 구체적인 행동 계획이 완성됩니다</li>
-            </ol>
-            <p className="pt-2">
-              만다라트는 목표 설정, 자기계발, 프로젝트 계획 등 다양한 분야에서 활용할 수 있는
-              무료 목표 계획표입니다. 지금 바로 목표를 세우고 실행 계획을 만들어보세요.
-            </p>
-          </div>
-        </section>
       </div>
-
-      {/* 템플릿 선택 모달 */}
-      <TemplateSelector
-        isOpen={isTemplateOpen}
-        onClose={() => setIsTemplateOpen(false)}
-        onSelect={handleSelectTemplate}
-      />
 
       {/* 가이드 모달 */}
       <GuideModal
         isOpen={isGuideOpen}
         onClose={() => setIsGuideOpen(false)}
+        onSelectExample={setSelectedExample}
       />
+
+      {/* 저장된 만다라트 모달 */}
+      <SavedMandalaModal
+        isOpen={isSavedListOpen}
+        onClose={() => setIsSavedListOpen(false)}
+        savedList={savedList}
+        onLoad={handleLoadSaved}
+        onDelete={deleteMandala}
+        onUpdateName={updateName}
+      />
+
+      {/* 예시 미리보기 모달 */}
+      <ExamplePreviewModal
+        isOpen={selectedExample !== null}
+        onClose={() => setSelectedExample(null)}
+        template={selectedExample}
+      />
+
+      {/* 저장 완료 토스트 */}
+      {showSaveToast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-navy text-white px-4 py-2 rounded-xl shadow-lg z-50 animate-fade-in">
+          저장되었습니다
+        </div>
+      )}
     </main>
   );
 }

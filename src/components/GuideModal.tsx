@@ -1,12 +1,32 @@
 'use client';
 
+import { useEffect } from 'react';
+import { TEMPLATES, MandalaTemplate } from '@/lib/templates';
+
 interface GuideModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSelectExample?: (template: MandalaTemplate) => void;
 }
 
-export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
+export default function GuideModal({ isOpen, onClose, onSelectExample }: GuideModalProps) {
+  // 모달 열릴 때 배경 스크롤 방지
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  const handleSelectExample = (template: MandalaTemplate) => {
+    if (onSelectExample) {
+      onSelectExample(template);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -33,11 +53,30 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
 
         {/* 본문 */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8">
+          {/* 만다라트란? */}
+          <section>
+            <h3 className="text-lg font-bold text-primary mb-3">만다라트란?</h3>
+            <p className="text-navy mb-3">
+              <strong>만다라트(Mandalart)</strong>는 목표 달성을 위한 계획 수립 도구입니다.
+              중심 목표를 8개의 세부 목표로 나누고, 각각을 다시 8개의 실행 항목으로 구체화하여
+              총 72개의 행동 계획을 만들어냅니다.
+            </p>
+            <div className="bg-neutral p-4 rounded-xl">
+              <p className="text-sm text-navy mb-2">
+                <strong>오타니 쇼헤이</strong>가 고등학교 시절 &quot;8개 구단 드래프트 1순위&quot;를 목표로
+                만다라트를 작성한 것으로 유명합니다.
+              </p>
+              <p className="text-sm text-muted">
+                체력, 멘탈, 기술, 인간성, 운까지 - 목표 달성에 필요한 모든 요소를 체계적으로 정리했습니다.
+              </p>
+            </div>
+          </section>
+
           {/* 인트로 */}
           <div className="text-center bg-primary-soft p-4 rounded-xl">
             <p className="text-navy font-medium">
               만다라트는 할 일 목록이 아니라<br />
-              <span className="text-primary font-bold">'삶을 어떻게 바꿀지'</span>를 정리하는 도구입니다.
+              <span className="text-primary font-bold">&apos;삶을 어떻게 바꿀지&apos;</span>를 정리하는 도구입니다.
             </p>
             <p className="text-sm text-muted mt-2">아래 순서대로 하나씩만 따라 해보세요.</p>
           </div>
@@ -50,18 +89,18 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
             </p>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="bg-red-50 p-3 rounded-xl border border-red-100">
-                <p className="text-red-600 font-medium mb-1">❌ 피해야 할 예시</p>
-                <p className="text-muted">"행복해지기"</p>
-                <p className="text-muted">"성공한 사람이 되기"</p>
+                <p className="text-red-600 font-medium mb-1">피해야 할 예시</p>
+                <p className="text-muted">&quot;행복해지기&quot;</p>
+                <p className="text-muted">&quot;성공한 사람이 되기&quot;</p>
               </div>
               <div className="bg-green-50 p-3 rounded-xl border border-green-100">
-                <p className="text-green-600 font-medium mb-1">⭕ 좋은 예시</p>
-                <p className="text-muted">"1년 안에 기타 초급 완성하기"</p>
-                <p className="text-muted">"6개월 안에 에세이를 더 재밌게 쓰기"</p>
+                <p className="text-green-600 font-medium mb-1">좋은 예시</p>
+                <p className="text-muted">&quot;1년 안에 기타 초급 완성하기&quot;</p>
+                <p className="text-muted">&quot;6개월 안에 에세이를 더 재밌게 쓰기&quot;</p>
               </div>
             </div>
             <div className="mt-3 text-sm text-muted bg-neutral p-3 rounded-xl">
-              <p className="font-medium text-navy">👉 기준</p>
+              <p className="font-medium text-navy">기준</p>
               <ul className="list-disc list-inside mt-1">
                 <li>지금부터 <strong>6개월~1년 안에</strong></li>
                 <li>실제로 삶을 조금 바꿔야 가능한 목표</li>
@@ -75,8 +114,8 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
             <p className="text-navy mb-3">질문은 하나면 충분합니다.</p>
             <blockquote className="bg-primary-soft border-l-4 border-primary p-4 rounded-r-xl">
               <p className="text-primary-hover italic">
-                "이 목표를 이루려면<br />
-                나는 <strong>어떤 사람으로 살아야 할까?</strong>"
+                &quot;이 목표를 이루려면<br />
+                나는 <strong>어떤 사람으로 살아야 할까?</strong>&quot;
               </p>
             </blockquote>
             <p className="text-sm text-muted mt-3">
@@ -86,17 +125,17 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
 
           {/* STEP 3 */}
           <section>
-            <h3 className="text-lg font-bold text-primary mb-3">STEP 3. 주변 칸은 '연결된 것'만 적어요</h3>
+            <h3 className="text-lg font-bold text-primary mb-3">STEP 3. 주변 칸은 &apos;연결된 것&apos;만 적어요</h3>
             <p className="text-navy mb-3">
               주변 칸은 하고 싶은 일을 나열하는 곳이 아닙니다.<br />
               <strong>가운데 목표에 실제로 도움이 되는 것만</strong> 적습니다.
             </p>
             <div className="bg-primary-soft p-3 rounded-xl mb-3">
-              <p className="text-primary font-medium">🎯 예시 - 가운데 목표: <em>에세이를 더 재밌게 쓰기</em></p>
+              <p className="text-primary font-medium">예시 - 가운데 목표: <em>에세이를 더 재밌게 쓰기</em></p>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="bg-green-50 p-3 rounded-xl border border-green-100">
-                <p className="text-green-600 font-medium mb-1">⭕ 관련 있음</p>
+                <p className="text-green-600 font-medium mb-1">관련 있음</p>
                 <ul className="text-muted space-y-1">
                   <li>• 이야기 구조 공부하기</li>
                   <li>• 단편소설 읽기</li>
@@ -104,7 +143,7 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
                 </ul>
               </div>
               <div className="bg-red-50 p-3 rounded-xl border border-red-100">
-                <p className="text-red-600 font-medium mb-1">❌ 관련 없음</p>
+                <p className="text-red-600 font-medium mb-1">관련 없음</p>
                 <ul className="text-muted space-y-1">
                   <li>• 영어 공부</li>
                   <li>• 운동 루틴 만들기</li>
@@ -113,8 +152,8 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
               </div>
             </div>
             <div className="mt-3 text-sm text-muted bg-neutral p-3 rounded-xl">
-              <p className="font-medium text-navy">👉 체크 질문</p>
-              <p className="mt-1">"이걸 하면 중심 목표에 가까워질까?"</p>
+              <p className="font-medium text-navy">체크 질문</p>
+              <p className="mt-1">&quot;이걸 하면 중심 목표에 가까워질까?&quot;</p>
             </div>
           </section>
 
@@ -127,7 +166,7 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
               <li>• 많아질수록 실행 확률은 낮아집니다</li>
             </ul>
             <div className="bg-primary-soft p-3 rounded-xl text-primary-hover italic">
-              👉 <em>한 칸을 꾸준히 실행하는 게<br />여덟 칸을 적어두는 것보다 낫습니다.</em>
+              <em>한 칸을 꾸준히 실행하는 게<br />여덟 칸을 적어두는 것보다 낫습니다.</em>
             </div>
           </section>
 
@@ -137,18 +176,18 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
             <p className="text-navy mb-3">계획은 <strong>시간이 들어가야</strong> 작동합니다.</p>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="bg-red-50 p-3 rounded-xl border border-red-100">
-                <p className="text-red-600 font-medium mb-1">❌ 피해야 할 예시</p>
-                <p className="text-muted">"틈나면 하기"</p>
-                <p className="text-muted">"언젠가 매일 하기"</p>
+                <p className="text-red-600 font-medium mb-1">피해야 할 예시</p>
+                <p className="text-muted">&quot;틈나면 하기&quot;</p>
+                <p className="text-muted">&quot;언젠가 매일 하기&quot;</p>
               </div>
               <div className="bg-green-50 p-3 rounded-xl border border-green-100">
-                <p className="text-green-600 font-medium mb-1">⭕ 좋은 예시</p>
-                <p className="text-muted">"월·목 저녁 글쓰기 시간에 넣기"</p>
-                <p className="text-muted">"기존 공부 시간 중 일부를 전환하기"</p>
+                <p className="text-green-600 font-medium mb-1">좋은 예시</p>
+                <p className="text-muted">&quot;월·목 저녁 글쓰기 시간에 넣기&quot;</p>
+                <p className="text-muted">&quot;기존 공부 시간 중 일부를 전환하기&quot;</p>
               </div>
             </div>
             <div className="mt-3 text-sm text-muted bg-neutral p-3 rounded-xl">
-              <p className="font-medium text-navy">👉 기준</p>
+              <p className="font-medium text-navy">기준</p>
               <ul className="list-disc list-inside mt-1">
                 <li><strong>새 시간을 만들기보다</strong></li>
                 <li>이미 쓰고 있는 시간 안에 끼워 넣기</li>
@@ -161,13 +200,35 @@ export default function GuideModal({ isOpen, onClose }: GuideModalProps) {
             <h3 className="text-lg font-bold text-primary mb-3">STEP 6. 욕심내지 말고, 느슨하게 가세요</h3>
             <p className="text-navy mb-3">빽빽한 계획은 오래가지 않습니다.</p>
             <ul className="text-navy space-y-1 mb-3">
-              <li>• 하루를 바꾸는 계획 ❌</li>
-              <li>• <strong>삶의 방향을 조금 조정하는 계획</strong> ⭕</li>
+              <li>• 하루를 바꾸는 계획 X</li>
+              <li>• <strong>삶의 방향을 조금 조정하는 계획</strong> O</li>
             </ul>
             <div className="bg-primary-soft p-3 rounded-xl text-primary-hover">
-              👉 목표는 달성보다 <strong>지속</strong>이 더 중요합니다.
+              목표는 달성보다 <strong>지속</strong>이 더 중요합니다.
             </div>
           </section>
+
+          {/* 예시 섹션 */}
+          {onSelectExample && (
+            <section className="border-t border-slate-border pt-8">
+              <h3 className="text-lg font-bold text-primary mb-3">예시 보기</h3>
+              <p className="text-navy mb-4">
+                다른 사람들은 어떻게 만다라트를 작성했는지 참고해보세요.
+              </p>
+              <div className="space-y-3">
+                {TEMPLATES.map((template) => (
+                  <button
+                    key={template.id}
+                    onClick={() => handleSelectExample(template)}
+                    className="w-full text-left p-4 border border-slate-border rounded-xl hover:bg-primary-soft transition-colors"
+                  >
+                    <div className="font-semibold text-navy">{template.name}</div>
+                    <div className="text-sm text-muted">{template.description}</div>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* 마무리 */}
           <div className="text-center bg-neutral p-4 rounded-xl">
