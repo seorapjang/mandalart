@@ -140,6 +140,34 @@ export default function MandalaApp() {
           <p>셀을 클릭하여 내용을 입력하세요. Enter로 저장, ESC로 취소합니다.</p>
           <p className="mt-1">중앙 영역의 모서리에 목표를 입력하면 해당 영역이 활성화됩니다.</p>
         </footer>
+
+        {/* SEO 콘텐츠 */}
+        <section className="mt-16 pt-8 border-t border-slate-200">
+          <h2 className="text-lg font-semibold text-navy mb-4">만다라트란?</h2>
+          <div className="text-sm text-muted space-y-3">
+            <p>
+              <strong>만다라트(Mandalart)</strong>는 목표 생성과 계획 수립을 위한 강력한 도구입니다.
+              일본의 디자이너 이마이즈미 히로아키가 개발한 이 방법은 중심 목표를 8개의 세부 목표로 나누고,
+              각 세부 목표를 다시 8개의 실행 항목으로 구체화하여 총 72개의 행동 계획을 만들어냅니다.
+            </p>
+            <p>
+              야구 선수 오타니 쇼헤이가 고등학교 시절 &quot;8개 구단 드래프트 1순위&quot;라는 목표를 달성하기 위해
+              만다라트를 활용한 것으로 유명해졌습니다. 그는 이 도구를 통해 체력, 멘탈, 기술 등
+              다양한 영역의 실행 계획을 체계적으로 수립했습니다.
+            </p>
+            <h3 className="text-base font-medium text-navy pt-2">만다라트 사용법</h3>
+            <ol className="list-decimal list-inside space-y-1 pl-2">
+              <li>중앙에 핵심 목표를 입력합니다</li>
+              <li>핵심 목표 주변 8칸에 세부 목표를 작성합니다</li>
+              <li>각 세부 목표가 외곽 영역의 중심이 되어 8개의 실행 항목으로 확장됩니다</li>
+              <li>72개의 구체적인 행동 계획이 완성됩니다</li>
+            </ol>
+            <p className="pt-2">
+              만다라트는 목표 설정, 자기계발, 프로젝트 계획 등 다양한 분야에서 활용할 수 있는
+              무료 목표 계획표입니다. 지금 바로 목표를 세우고 실행 계획을 만들어보세요.
+            </p>
+          </div>
+        </section>
       </div>
 
       {/* 템플릿 선택 모달 */}

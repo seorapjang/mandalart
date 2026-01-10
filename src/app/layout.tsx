@@ -7,8 +7,23 @@ const GTM_ID = "GTM-575GLJXM";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://mandalart.seorapjang.com"),
   title: "만다라트 - 목표 설정 도구 | Mandala Chart",
-  description: "만다라트를 쉽게 만들고 공유하세요. 목표를 9개의 세부 목표로 나누고, 각각을 8개의 실행 항목으로 구체화하는 목표 설정 도구입니다.",
-  keywords: ["만다라트", "mandala chart", "목표 설정", "자기계발", "오타니 쇼헤이", "목표 관리"],
+  description: "만다라트로 목표를 생성하고 계획을 세우세요. 9개의 세부 목표와 72개의 실행 항목으로 구체화하는 무료 목표 설정 도구입니다.",
+  keywords: [
+    "만다라트",
+    "mandalart",
+    "mandala chart",
+    "목표 설정",
+    "목표 생성",
+    "계획",
+    "실행 계획",
+    "목표 달성",
+    "자기계발",
+    "오타니 쇼헤이",
+    "목표 관리",
+    "만다라 차트",
+    "목표 계획표",
+    "목표 세우기",
+  ],
   authors: [{ name: "Mandala Chart" }],
   icons: {
     icon: [
@@ -74,6 +89,36 @@ export default function RootLayout({
           as="style"
           crossOrigin="anonymous"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+        {/* JSON-LD 구조화 데이터 */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "만다라트",
+              alternateName: ["Mandalart", "Mandala Chart", "만다라 차트"],
+              description:
+                "만다라트로 목표를 생성하고 계획을 세우세요. 9개의 세부 목표와 72개의 실행 항목으로 구체화하는 무료 목표 설정 도구입니다.",
+              url: "https://mandalart.seorapjang.com",
+              applicationCategory: "ProductivityApplication",
+              operatingSystem: "Web",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "KRW",
+              },
+              featureList: [
+                "목표 설정",
+                "목표 생성",
+                "계획 수립",
+                "실행 계획 작성",
+                "목표 시각화",
+              ],
+              inLanguage: "ko",
+            }),
+          }}
         />
       </head>
       <body className="font-sans antialiased">
